@@ -4,14 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using OxyPlot;
+using System.Collections.ObjectModel;
 
 namespace HolterECG
-{   
-    class SignalSource
+{
+    class State : System.ComponentModel.INotifyPropertyChanged
     {
-        public SignalSource()
+        public State()
         {
-            this.Points = new List<DataPoint>
+            this.Points = new ObservableCollection<DataPoint>
                               {
                                   new DataPoint(0, 4),
                                   new DataPoint(10, 13),
@@ -22,6 +23,8 @@ namespace HolterECG
                               };
         }
 
-        public IList<DataPoint> Points { get; private set; }
+        public ObservableCollection<DataPoint> Points { get; private set; }
+
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
     }
 }

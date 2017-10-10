@@ -20,9 +20,27 @@ namespace HolterECG
     /// </summary>
     public partial class MainWindow : Window
     {
+        State state;
         public MainWindow()
         {
             InitializeComponent();
+            state = Application.Current.FindResource("state") as State;
+            this.frmContent.Content = new Report();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            state.Points.Add(new OxyPlot.DataPoint((state.Points.Count)*10, 10));
+        }
+
+        private void btnAddPatient_Click(object sender, RoutedEventArgs e)
+        {
+            this.frmContent.Content = new AddPatient();
+        }
+
+        private void btnPrint_Click(object sender, RoutedEventArgs e)
+        {
+            this.frmContent.Content = new Report();
         }
     }
 }
