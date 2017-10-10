@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace HolterECG
 {
     /// <summary>
-    /// Interaction logic for Report.xaml
+    /// Interaction logic for ManualPressurePage.xaml
     /// </summary>
-    public partial class Report : Page
+    public partial class ManualPressurePage : Page
     {
-        public Report()
+        public ManualPressurePage()
         {
             InitializeComponent();
         }

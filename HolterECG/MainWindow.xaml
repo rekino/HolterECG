@@ -34,7 +34,7 @@
             <Button Style="{StaticResource btn-menu}">Add Report</Button>
             <Button Style="{StaticResource btn-menu}">Settings</Button>
             <Button Style="{StaticResource btn-menu}">Help</Button>
-            <Button Style="{StaticResource btn-menu}">Manual Blood Pressuring</Button>
+            <Button Name="btnManualBlood" Style="{StaticResource btn-menu}" Click="btnManualBlood_Click">Manual Blood Pressuring</Button>
         </StackPanel>
         <StackPanel Grid.Row="0" Grid.Column="2">
             <Button Style="{StaticResource btn}" Click="Button_Click">U</Button>
@@ -42,6 +42,15 @@
             <Button Style="{StaticResource btn}">U</Button>
             <Button Style="{StaticResource btn}">U</Button>
         </StackPanel>
-        <Frame Name="frmContent" Grid.Row="0" Grid.Column="1" NavigationUIVisibility="Hidden" Padding="10,0,10,0"/>
+        <Grid Grid.Row="0" Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="1*" />
+            </Grid.RowDefinitions>
+            <Label Style="{StaticResource label}" Grid.Row="0" Content="{Binding ElementName=frmContent, Path=Content.Title}" />
+            <Separator Grid.Row="1" />
+            <Frame Name="frmContent" Grid.Row="2" NavigationUIVisibility="Hidden" Padding="10,0,10,0" Source="{Binding Path=Route}"/>
+        </Grid>
     </Grid>
 </Window>

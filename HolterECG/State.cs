@@ -10,6 +10,7 @@ namespace HolterECG
 {
     class State : System.ComponentModel.INotifyPropertyChanged
     {
+        string _route = "ReportPage.xaml";
         public State()
         {
             this.Points = new ObservableCollection<DataPoint>
@@ -24,6 +25,15 @@ namespace HolterECG
         }
 
         public ObservableCollection<DataPoint> Points { get; private set; }
+        public string Route
+        {
+            get { return _route; }
+            set
+            {
+                _route = value;
+                this.PropertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs("Route"));
+            }
+        }
 
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
     }

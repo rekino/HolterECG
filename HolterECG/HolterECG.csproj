@@ -59,14 +59,17 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="AddPatient.xaml.cs">
-      <DependentUpon>AddPatient.xaml</DependentUpon>
+    <Compile Include="AddPatientPage.xaml.cs">
+      <DependentUpon>AddPatientPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Report.xaml.cs">
-      <DependentUpon>Report.xaml</DependentUpon>
+    <Compile Include="ManualPressurePage.xaml.cs">
+      <DependentUpon>ManualPressurePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ReportPage.xaml.cs">
+      <DependentUpon>ReportPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="State.cs" />
-    <Page Include="AddPatient.xaml">
+    <Page Include="AddPatientPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -82,7 +85,11 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Report.xaml">
+    <Page Include="ManualPressurePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ReportPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

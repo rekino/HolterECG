@@ -25,7 +25,6 @@ namespace HolterECG
         {
             InitializeComponent();
             state = Application.Current.FindResource("state") as State;
-            this.frmContent.Content = new Report();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -35,12 +34,17 @@ namespace HolterECG
 
         private void btnAddPatient_Click(object sender, RoutedEventArgs e)
         {
-            this.frmContent.Content = new AddPatient();
+            state.Route = "AddPatientPage.xaml";
         }
 
         private void btnPrint_Click(object sender, RoutedEventArgs e)
         {
-            this.frmContent.Content = new Report();
+            state.Route = "ReportPage.xaml";
+        }
+
+        private void btnManualBlood_Click(object sender, RoutedEventArgs e)
+        {
+            state.Route = "ManualPressurePage.xaml";
         }
     }
 }
