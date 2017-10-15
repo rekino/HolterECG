@@ -6,6 +6,57 @@
     <Window.DataContext>
         <Binding Source="{StaticResource state}" />
     </Window.DataContext>
+    <Window.Resources>
+        <BitmapImage x:Key="report1off" UriSource="/assets/Report1off.png" />
+        <BitmapImage x:Key="report1on" UriSource="/assets/Report1on.png" />
+        <BitmapImage x:Key="report2off" UriSource="/assets/Report2off.png" />
+        <BitmapImage x:Key="report2on" UriSource="/assets/Report2on.png" />
+        <BitmapImage x:Key="report3off" UriSource="/assets/Report3off.png" />
+        <BitmapImage x:Key="report3on" UriSource="/assets/Report3on.png" />
+        <BitmapImage x:Key="report4off" UriSource="/assets/Report4off.png" />
+        <BitmapImage x:Key="report4on" UriSource="/assets/Report4on.png" />
+        
+        <Style x:Key="imgReportText" TargetType="Image">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Path=ActiveReport}" Value="0">
+                    <Setter Property="Source" Value="{StaticResource report1on}" />
+                </DataTrigger>
+            </Style.Triggers>
+            <Style.Setters>
+                <Setter Property="Source" Value="{StaticResource report1off}" />
+            </Style.Setters>
+        </Style>
+        <Style x:Key="imgReportLine" TargetType="Image">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Path=ActiveReport}" Value="1">
+                    <Setter Property="Source" Value="{StaticResource report2on}" />
+                </DataTrigger>
+            </Style.Triggers>
+            <Style.Setters>
+                <Setter Property="Source" Value="{StaticResource report2off}" />
+            </Style.Setters>
+        </Style>
+        <Style x:Key="imgReportBar" TargetType="Image">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Path=ActiveReport}" Value="2">
+                    <Setter Property="Source" Value="{StaticResource report3on}" />
+                </DataTrigger>
+            </Style.Triggers>
+            <Style.Setters>
+                <Setter Property="Source" Value="{StaticResource report3off}" />
+            </Style.Setters>
+        </Style>
+        <Style x:Key="imgReportPie" TargetType="Image">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Path=ActiveReport}" Value="3">
+                    <Setter Property="Source" Value="{StaticResource report4on}" />
+                </DataTrigger>
+            </Style.Triggers>
+            <Style.Setters>
+                <Setter Property="Source" Value="{StaticResource report4off}" />
+            </Style.Setters>
+        </Style>
+    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
@@ -37,10 +88,18 @@
             <Button Name="btnManualBlood" Style="{StaticResource btn-menu}" Click="btnManualBlood_Click">Manual Blood Pressuring</Button>
         </StackPanel>
         <StackPanel Grid.Row="0" Grid.Column="2">
-            <Button Style="{StaticResource btn}" Click="Button_Click">U</Button>
-            <Button Style="{StaticResource btn}">U</Button>
-            <Button Style="{StaticResource btn}">U</Button>
-            <Button Style="{StaticResource btn}">U</Button>
+            <Button Name="btnTextReport" Style="{StaticResource btn-transparent}" Click="btnTextReport_Click">
+                <Image Style="{StaticResource imgReportText}" />
+            </Button>
+            <Button Name="btnLineReport" Style="{StaticResource btn-transparent}" Click="btnLineReport_Click">
+                <Image Style="{StaticResource imgReportLine}" />
+            </Button>
+            <Button Name="btnBarReport" Style="{StaticResource btn-transparent}" Click="btnBarReport_Click">
+                <Image Style="{StaticResource imgReportBar}" />
+            </Button>
+            <Button Name="btnPieReport" Style="{StaticResource btn-transparent}" Click="btnPieReport_Click">
+                <Image Style="{StaticResource imgReportPie}" />
+            </Button>
         </StackPanel>
         <Grid Grid.Row="0" Grid.Column="1">
             <Grid.RowDefinitions>

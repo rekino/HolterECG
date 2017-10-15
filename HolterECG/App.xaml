@@ -13,6 +13,10 @@
             <Setter Property="HorizontalContentAlignment" Value="Left" />
             <Setter Property="VerticalContentAlignment" Value="Bottom" />
         </Style>
+        <Style x:Key="btn-transparent" TargetType="Button" BasedOn="{StaticResource btn}">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderThickness" Value="0" />
+        </Style>
         <Style x:Key="reading" TargetType="Label">
             <Setter Property="VerticalContentAlignment" Value="Top" />
             <Setter Property="HorizontalContentAlignment" Value="Center" />
@@ -35,6 +39,13 @@
         <Style x:Key="txt-box" TargetType="TextBox">
             <Setter Property="Margin" Value="5" />
             <Setter Property="Padding" Value="5" />
+            <Setter Property="Height" Value="30" />
+        </Style>
+        <Style x:Key="txt-box-multi" TargetType="TextBox" BasedOn="{StaticResource txt-box}">
+            <Setter Property="TextWrapping" Value="Wrap" />
+            <Setter Property="AcceptsReturn" Value="True" />
+            <Setter Property="Height" Value="110" />
+            <Setter Property="VerticalScrollBarVisibility" Value="Auto" />
         </Style>
         <Style x:Key="window" TargetType="Window">
             <Setter Property="Background" Value="DarkBlue" />

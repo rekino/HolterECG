@@ -46,5 +46,25 @@ namespace HolterECG
         {
             state.Route = "ManualPressurePage.xaml";
         }
+
+        private void btnTextReport_Click(object sender, RoutedEventArgs e)
+        {
+            state.ActiveReport = ReportType.Text;
+        }
+
+        private void btnLineReport_Click(object sender, RoutedEventArgs e)
+        {
+            state.ActiveReport = ReportType.Line;
+        }
+
+        private void btnBarReport_Click(object sender, RoutedEventArgs e)
+        {
+            state.ActiveReport = ReportType.Bar;
+        }
+
+        private void btnPieReport_Click(object sender, RoutedEventArgs e)
+        {
+            state.ActiveReport = ReportType.Pie;
+        }
     }
 }

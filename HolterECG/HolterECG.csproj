@@ -122,6 +122,25 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="assets\Add Patient icon.png" />
+    <Resource Include="assets\Add Report icon.png" />
+    <Resource Include="assets\Edit Patient icon.png" />
+    <Resource Include="assets\Help icon.png" />
+    <Resource Include="assets\Manual Blood Pressuring icon.png" />
+    <Resource Include="assets\Print icon.png" />
+    <Resource Include="assets\Report1off.png" />
+    <Resource Include="assets\Report1on.png" />
+    <Resource Include="assets\Report2off.png" />
+    <Resource Include="assets\Report2on.png" />
+    <Resource Include="assets\Report3off.png" />
+    <Resource Include="assets\Report3on.png" />
+    <Resource Include="assets\Report4off.png" />
+    <Resource Include="assets\Report4on.png" />
+    <Resource Include="assets\Setting Icon.png" />
+    <Resource Include="assets\USB Connect-Off.png" />
+    <Resource Include="assets\USB Connect-On.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

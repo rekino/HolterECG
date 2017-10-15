@@ -8,9 +8,11 @@ using System.Collections.ObjectModel;
 
 namespace HolterECG
 {
+    enum ReportType { Text, Line, Bar, Pie }
     class State : System.ComponentModel.INotifyPropertyChanged
     {
         string _route = "ReportPage.xaml";
+        ReportType _activeReport = ReportType.Text;
         public State()
         {
             this.Points = new ObservableCollection<DataPoint>
@@ -34,6 +36,15 @@ namespace HolterECG
                 this.PropertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs("Route"));
             }
         }
+        public ReportType ActiveReport
+        {
+            get { return _activeReport; }
+            set { 
+                _activeReport = value;
+                this.PropertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs("ActiveReport"));
+            }
+        }
+        
 
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
     }
