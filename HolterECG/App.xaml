@@ -4,14 +4,15 @@
              xmlns:local="clr-namespace:HolterECG"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
+        <Color x:Key="colorPrimary">#1C376E</Color>
         <Style x:Key="btn" TargetType="Button">
             <Setter Property="Margin" Value="5" />
             <Setter Property="Padding" Value="5" />
         </Style>
         <Style x:Key="btn-menu" TargetType="Button" BasedOn="{StaticResource btn}">
             <Setter Property="Height" Value="75" />
-            <Setter Property="HorizontalContentAlignment" Value="Left" />
-            <Setter Property="VerticalContentAlignment" Value="Bottom" />
+            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+            <Setter Property="VerticalContentAlignment" Value="Stretch" />
         </Style>
         <Style x:Key="btn-transparent" TargetType="Button" BasedOn="{StaticResource btn}">
             <Setter Property="Background" Value="Transparent" />
@@ -27,6 +28,7 @@
             <Setter Property="VerticalAlignment" Value="Stretch" />
             <Setter Property="HorizontalAlignment" Value="Stretch" />
             <Setter Property="Foreground" Value="White" />
+            <Setter Property="FontSize" Value="14" />
         </Style>
         <Style x:Key="label-right" TargetType="Label" BasedOn="{StaticResource label}">
             <Setter Property="HorizontalContentAlignment" Value="Right" />
@@ -48,7 +50,11 @@
             <Setter Property="VerticalScrollBarVisibility" Value="Auto" />
         </Style>
         <Style x:Key="window" TargetType="Window">
-            <Setter Property="Background" Value="DarkBlue" />
+            <Setter Property="Background">
+                <Setter.Value>
+                    <SolidColorBrush Color="{StaticResource colorPrimary}" />
+                </Setter.Value>
+            </Setter>
         </Style>
 
         <local:State x:Key="state" />

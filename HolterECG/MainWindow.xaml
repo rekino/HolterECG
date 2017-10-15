@@ -7,53 +7,60 @@
         <Binding Source="{StaticResource state}" />
     </Window.DataContext>
     <Window.Resources>
-        <BitmapImage x:Key="report1off" UriSource="/assets/Report1off.png" />
-        <BitmapImage x:Key="report1on" UriSource="/assets/Report1on.png" />
-        <BitmapImage x:Key="report2off" UriSource="/assets/Report2off.png" />
-        <BitmapImage x:Key="report2on" UriSource="/assets/Report2on.png" />
-        <BitmapImage x:Key="report3off" UriSource="/assets/Report3off.png" />
-        <BitmapImage x:Key="report3on" UriSource="/assets/Report3on.png" />
-        <BitmapImage x:Key="report4off" UriSource="/assets/Report4off.png" />
-        <BitmapImage x:Key="report4on" UriSource="/assets/Report4on.png" />
+        <BitmapImage x:Key="icoReport1off" UriSource="/assets/Report1off.png" />
+        <BitmapImage x:Key="icoReport1on" UriSource="/assets/Report1on.png" />
+        <BitmapImage x:Key="icoReport2off" UriSource="/assets/Report2off.png" />
+        <BitmapImage x:Key="icoReport2on" UriSource="/assets/Report2on.png" />
+        <BitmapImage x:Key="icoReport3off" UriSource="/assets/Report3off.png" />
+        <BitmapImage x:Key="icoReport3on" UriSource="/assets/Report3on.png" />
+        <BitmapImage x:Key="icoReport4off" UriSource="/assets/Report4off.png" />
+        <BitmapImage x:Key="icoReport4on" UriSource="/assets/Report4on.png" />
+        <BitmapImage x:Key="icoAddPatient" UriSource="/assets/Add Patient icon.png" />
+        <BitmapImage x:Key="icoEditPatient" UriSource="/assets/Edit Patient icon.png" />
+        <BitmapImage x:Key="icoPrint" UriSource="/assets/Print icon.png" />
+        <BitmapImage x:Key="icoSetting" UriSource="/assets/Setting icon.png" />
+        <BitmapImage x:Key="icoHelp" UriSource="/assets/Help icon.png" />
+        <BitmapImage x:Key="icoManualBlood" UriSource="/assets/Manual Blood Pressuring icon.png" />
+        <BitmapImage x:Key="icoAddReport" UriSource="/assets/Add Report icon.png" />
         
         <Style x:Key="imgReportText" TargetType="Image">
             <Style.Triggers>
                 <DataTrigger Binding="{Binding Path=ActiveReport}" Value="0">
-                    <Setter Property="Source" Value="{StaticResource report1on}" />
+                    <Setter Property="Source" Value="{StaticResource icoReport1on}" />
                 </DataTrigger>
             </Style.Triggers>
             <Style.Setters>
-                <Setter Property="Source" Value="{StaticResource report1off}" />
+                <Setter Property="Source" Value="{StaticResource icoReport1off}" />
             </Style.Setters>
         </Style>
         <Style x:Key="imgReportLine" TargetType="Image">
             <Style.Triggers>
                 <DataTrigger Binding="{Binding Path=ActiveReport}" Value="1">
-                    <Setter Property="Source" Value="{StaticResource report2on}" />
+                    <Setter Property="Source" Value="{StaticResource icoReport2on}" />
                 </DataTrigger>
             </Style.Triggers>
             <Style.Setters>
-                <Setter Property="Source" Value="{StaticResource report2off}" />
+                <Setter Property="Source" Value="{StaticResource icoReport2off}" />
             </Style.Setters>
         </Style>
         <Style x:Key="imgReportBar" TargetType="Image">
             <Style.Triggers>
                 <DataTrigger Binding="{Binding Path=ActiveReport}" Value="2">
-                    <Setter Property="Source" Value="{StaticResource report3on}" />
+                    <Setter Property="Source" Value="{StaticResource icoReport3on}" />
                 </DataTrigger>
             </Style.Triggers>
             <Style.Setters>
-                <Setter Property="Source" Value="{StaticResource report3off}" />
+                <Setter Property="Source" Value="{StaticResource icoReport3off}" />
             </Style.Setters>
         </Style>
         <Style x:Key="imgReportPie" TargetType="Image">
             <Style.Triggers>
                 <DataTrigger Binding="{Binding Path=ActiveReport}" Value="3">
-                    <Setter Property="Source" Value="{StaticResource report4on}" />
+                    <Setter Property="Source" Value="{StaticResource icoReport4on}" />
                 </DataTrigger>
             </Style.Triggers>
             <Style.Setters>
-                <Setter Property="Source" Value="{StaticResource report4off}" />
+                <Setter Property="Source" Value="{StaticResource icoReport4off}" />
             </Style.Setters>
         </Style>
     </Window.Resources>
@@ -68,8 +75,28 @@
         </Grid.ColumnDefinitions>
         
         <StackPanel Grid.Row="0" Grid.Column="0">
-            <Button Name="btnAddPatient" Style="{StaticResource btn-menu}" Click="btnAddPatient_Click">Add Patient</Button>
-            <Button Style="{StaticResource btn-menu}">Open Patient</Button>
+            <Button Name="btnAddPatient" Style="{StaticResource btn-menu}" Background="#00AFF0" Click="btnAddPatient_Click">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="1*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Column="0" Style="{StaticResource label}" VerticalAlignment="Bottom">Add Patient</Label>
+                    <Image Grid.Column="2" Source="{StaticResource icoAddPatient}" />
+                </Grid>
+            </Button>
+            <Button Style="{StaticResource btn-menu}" Background="#7DCF01">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="1*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Column="0" Style="{StaticResource label}" VerticalAlignment="Bottom">Edit Patient</Label>
+                    <Image Grid.Column="2" Source="{StaticResource icoEditPatient}" />
+                </Grid>
+            </Button>
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
@@ -78,14 +105,63 @@
                     <ColumnDefinition Width="1*" />
                     <ColumnDefinition Width="1*" />
                 </Grid.ColumnDefinitions>
-                <Button Style="{StaticResource btn-menu}" Grid.Row="0" Grid.Column="0">Import</Button>
-                <Button Style="{StaticResource btn-menu}" Grid.Row="0" Grid.Column="1">Export</Button>
+                <Button Style="{StaticResource btn-menu}" Background="#F57E20" Grid.Row="0" Grid.Column="0">Import</Button>
+                <Button Style="{StaticResource btn-menu}" Background="#E75142" Grid.Row="0" Grid.Column="1">Export</Button>
             </Grid>
-            <Button Name="btnPrint" Style="{StaticResource btn-menu}" Click="btnPrint_Click">Print</Button>
-            <Button Style="{StaticResource btn-menu}">Add Report</Button>
-            <Button Style="{StaticResource btn-menu}">Settings</Button>
-            <Button Style="{StaticResource btn-menu}">Help</Button>
-            <Button Name="btnManualBlood" Style="{StaticResource btn-menu}" Click="btnManualBlood_Click">Manual Blood Pressuring</Button>
+            <Button Name="btnPrint" Style="{StaticResource btn-menu}" Background="#1085CA" Click="btnPrint_Click">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="1*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Column="0" Style="{StaticResource label}" VerticalAlignment="Bottom">Print</Label>
+                    <Image Grid.Column="2" Source="{StaticResource icoPrint}" />
+                </Grid>
+            </Button>
+            <Button Style="{StaticResource btn-menu}" Background="#FFCA10">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="1*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Column="0" Style="{StaticResource label}" VerticalAlignment="Bottom">Add Report</Label>
+                    <Image Grid.Column="2" Source="{StaticResource icoAddReport}" />
+                </Grid>
+            </Button>
+            <Button Style="{StaticResource btn-menu}" Background="#AB8E4C">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="1*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Column="0" Style="{StaticResource label}" VerticalAlignment="Bottom">Settings</Label>
+                    <Image Grid.Column="2" Source="{StaticResource icoSetting}" />
+                </Grid>
+            </Button>
+            <Button Style="{StaticResource btn-menu}" Background="#35B449">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="1*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Column="0" Style="{StaticResource label}" VerticalAlignment="Bottom">Help</Label>
+                    <Image Grid.Column="2" Source="{StaticResource icoHelp}" />
+                </Grid>
+            </Button>
+            <Button Name="btnManualBlood" Style="{StaticResource btn-menu}" Background="#F7941D" Click="btnManualBlood_Click">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Label Grid.Row="1" Style="{StaticResource label}">Manual Blood Pressuring</Label>
+                    <Image Grid.Row="0" Source="{StaticResource icoManualBlood}" HorizontalAlignment="Right"/>
+                </Grid>
+            </Button>
         </StackPanel>
         <StackPanel Grid.Row="0" Grid.Column="2">
             <Button Name="btnTextReport" Style="{StaticResource btn-transparent}" Click="btnTextReport_Click">
