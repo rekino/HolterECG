@@ -38,18 +38,21 @@
         <Label Grid.Row="0" Grid.Column="2" Style="{StaticResource label-right}">Symptoms:</Label>
         <Label Grid.Row="3" Grid.Column="2" Style="{StaticResource label-right}">Medications:</Label>
         <Label Grid.Row="6" Grid.Column="2" Style="{StaticResource label-right}">More Information:</Label>
-        <TextBox Style="{StaticResource txt-box}" Grid.Row="0" Grid.Column="1" />
-        <TextBox Style="{StaticResource txt-box}" Grid.Row="1" Grid.Column="1" />
-        <TextBox Style="{StaticResource txt-box}" Grid.Row="2" Grid.Column="1" />
-        <TextBox Style="{StaticResource txt-box}" Grid.Row="3" Grid.Column="1" />
-        <TextBox Style="{StaticResource txt-box}" Grid.Row="4" Grid.Column="1" />
-        <TextBox Style="{StaticResource txt-box}" Grid.Row="5" Grid.Column="1" />
-        <TextBox Style="{StaticResource txt-box}" Grid.Row="6" Grid.Column="1" />
-        <TextBox Style="{StaticResource txt-box}" Grid.Row="7" Grid.Column="1" />
-        <TextBox Style="{StaticResource txt-box}" Grid.Row="8" Grid.Column="1" />
-        <TextBox Style="{StaticResource txt-box-multi}" Grid.Row="0" Grid.RowSpan="3" Grid.Column="3" />
-        <TextBox Style="{StaticResource txt-box-multi}" Grid.Row="3" Grid.RowSpan="3" Grid.Column="3" />
-        <TextBox Style="{StaticResource txt-box-multi}" Grid.Row="6" Grid.RowSpan="3" Grid.Column="3" />
-        <Button Style="{StaticResource btn}" Grid.Row="9" Grid.Column="3" HorizontalAlignment="Right">Add Patient</Button>
+        <TextBox Name="txtFirstName" Style="{StaticResource txt-box}" Grid.Row="0" Grid.Column="1" />
+        <TextBox Name="txtLastName" Style="{StaticResource txt-box}" Grid.Row="1" Grid.Column="1" />
+        <TextBox Name="txtPhone" Style="{StaticResource txt-box}" Grid.Row="2" Grid.Column="1" />
+        <TextBox Name="txtHeight" Style="{StaticResource txt-box}" Grid.Row="3" Grid.Column="1" />
+        <TextBox Name="txtWeight" Style="{StaticResource txt-box}" Grid.Row="4" Grid.Column="1" />
+        <TextBox Name="txtPhysician" Style="{StaticResource txt-box}" Grid.Row="5" Grid.Column="1" />
+        <ComboBox Name="cmbSex" Style="{StaticResource txt-box}" Grid.Row="6" Grid.Column="1" IsReadOnly="True">
+            <ComboBoxItem>Female</ComboBoxItem>
+            <ComboBoxItem>Male</ComboBoxItem>
+        </ComboBox>
+        <TextBox Name="txtAge" Style="{StaticResource txt-box}" Grid.Row="7" Grid.Column="1" />
+        <TextBox Name="txtInsurance" Style="{StaticResource txt-box}" Grid.Row="8" Grid.Column="1" />
+        <TextBox Name="txtSymptoms" Style="{StaticResource txt-box-multi}" Grid.Row="0" Grid.RowSpan="3" Grid.Column="3" />
+        <TextBox Name="txtMedications" Style="{StaticResource txt-box-multi}" Grid.Row="3" Grid.RowSpan="3" Grid.Column="3" />
+        <TextBox Name="txtInfo" Style="{StaticResource txt-box-multi}" Grid.Row="6" Grid.RowSpan="3" Grid.Column="3" />
+        <Button Name="btnAddPatient" Style="{StaticResource btn}" Grid.Row="9" Grid.Column="3" HorizontalAlignment="Right" Click="btnAddPatient_Click">Add Patient</Button>
     </Grid>
 </Page>

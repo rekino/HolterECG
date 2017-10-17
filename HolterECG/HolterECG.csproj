@@ -62,13 +62,14 @@
     <Compile Include="AddPatientPage.xaml.cs">
       <DependentUpon>AddPatientPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="DataStructures\Patient.cs" />
     <Compile Include="ManualPressurePage.xaml.cs">
       <DependentUpon>ManualPressurePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="ReportPage.xaml.cs">
       <DependentUpon>ReportPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="State.cs" />
+    <Compile Include="DataStructures\State.cs" />
     <Page Include="AddPatientPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -140,6 +141,11 @@
     <Resource Include="assets\Setting Icon.png" />
     <Resource Include="assets\USB Connect-Off.png" />
     <Resource Include="assets\USB Connect-On.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="patient_files.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

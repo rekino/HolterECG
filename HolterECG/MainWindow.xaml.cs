@@ -24,6 +24,7 @@ namespace HolterECG
         public MainWindow()
         {
             InitializeComponent();
+            System.IO.Directory.CreateDirectory(System.AppDomain.CurrentDomain.BaseDirectory + @"\files");
             state = Application.Current.FindResource("state") as State;
         }
 
