@@ -3,16 +3,142 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-      xmlns:oxy="http://oxyplot.org/wpf"
+      xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+      xmlns:local="clr-namespace:HolterECG.Controls"
       mc:Ignorable="d" 
-      d:DesignHeight="300" d:DesignWidth="300"
+      d:DesignHeight="500" d:DesignWidth="500"
 	Title="Report">
     <Page.DataContext>
         <Binding Source="{StaticResource state}" />
     </Page.DataContext>
-    <oxy:Plot Title="Example" Margin="5" Grid.Row="0" Grid.Column="1">
-        <oxy:Plot.Series>
-            <oxy:LineSeries ItemsSource="{Binding Path=Points}" />
-        </oxy:Plot.Series>
-    </oxy:Plot>
+    <Page.Resources>
+        <BitmapImage x:Key="icoReport1off" UriSource="/assets/Report1off.png" />
+        <BitmapImage x:Key="icoReport1on" UriSource="/assets/Report1on.png" />
+        <BitmapImage x:Key="icoReport2off" UriSource="/assets/Report2off.png" />
+        <BitmapImage x:Key="icoReport2on" UriSource="/assets/Report2on.png" />
+        <BitmapImage x:Key="icoReport3off" UriSource="/assets/Report3off.png" />
+        <BitmapImage x:Key="icoReport3on" UriSource="/assets/Report3on.png" />
+        <BitmapImage x:Key="icoReport4off" UriSource="/assets/Report4off.png" />
+        <BitmapImage x:Key="icoReport4on" UriSource="/assets/Report4on.png" />
+        <Style x:Key="imgReportText" TargetType="Image">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Path=Home.ActiveReport}" Value="0">
+                    <Setter Property="Source" Value="{StaticResource icoReport1on}" />
+                </DataTrigger>
+            </Style.Triggers>
+            <Style.Setters>
+                <Setter Property="Source" Value="{StaticResource icoReport1off}" />
+            </Style.Setters>
+        </Style>
+        <Style x:Key="imgReportLine" TargetType="Image">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Path=Home.ActiveReport}" Value="1">
+                    <Setter Property="Source" Value="{StaticResource icoReport2on}" />
+                </DataTrigger>
+            </Style.Triggers>
+            <Style.Setters>
+                <Setter Property="Source" Value="{StaticResource icoReport2off}" />
+            </Style.Setters>
+        </Style>
+        <Style x:Key="imgReportBar" TargetType="Image">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Path=Home.ActiveReport}" Value="2">
+                    <Setter Property="Source" Value="{StaticResource icoReport3on}" />
+                </DataTrigger>
+            </Style.Triggers>
+            <Style.Setters>
+                <Setter Property="Source" Value="{StaticResource icoReport3off}" />
+            </Style.Setters>
+        </Style>
+        <Style x:Key="imgReportPie" TargetType="Image">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Path=Home.ActiveReport}" Value="3">
+                    <Setter Property="Source" Value="{StaticResource icoReport4on}" />
+                </DataTrigger>
+            </Style.Triggers>
+            <Style.Setters>
+                <Setter Property="Source" Value="{StaticResource icoReport4off}" />
+            </Style.Setters>
+        </Style>
+        <Style x:Key="rptReadings" TargetType="FrameworkElement">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Path=Home.ActiveReport}" Value="0">
+                    <Setter Property="Visibility" Value="Visible" />
+                </DataTrigger>
+            </Style.Triggers>
+            <Style.Setters>
+                <Setter Property="Visibility" Value="Hidden" />
+            </Style.Setters>
+        </Style>
+        <Style x:Key="rptLine" TargetType="FrameworkElement">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Path=Home.ActiveReport}" Value="1">
+                    <Setter Property="Visibility" Value="Visible" />
+                </DataTrigger>
+            </Style.Triggers>
+            <Style.Setters>
+                <Setter Property="Visibility" Value="Hidden" />
+            </Style.Setters>
+        </Style>
+        <Style x:Key="rptBar" TargetType="FrameworkElement">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Path=Home.ActiveReport}" Value="2">
+                    <Setter Property="Visibility" Value="Visible" />
+                </DataTrigger>
+            </Style.Triggers>
+            <Style.Setters>
+                <Setter Property="Visibility" Value="Hidden" />
+            </Style.Setters>
+        </Style>
+        <Style x:Key="rptPie" TargetType="FrameworkElement">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Path=Home.ActiveReport}" Value="3">
+                    <Setter Property="Visibility" Value="Visible" />
+                </DataTrigger>
+            </Style.Triggers>
+            <Style.Setters>
+                <Setter Property="Visibility" Value="Hidden" />
+            </Style.Setters>
+        </Style>
+    </Page.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="50" />
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Row="0" Grid.Column="1">
+            <Button Name="btnTextReport" Style="{StaticResource btn-transparent}" Click="btnTextReport_Click">
+                <Image Style="{StaticResource imgReportText}" />
+            </Button>
+            <Button Name="btnLineReport" Style="{StaticResource btn-transparent}" Click="btnLineReport_Click">
+                <Image Style="{StaticResource imgReportLine}" />
+            </Button>
+            <Button Name="btnBarReport" Style="{StaticResource btn-transparent}" Click="btnBarReport_Click">
+                <Image Style="{StaticResource imgReportBar}" />
+            </Button>
+            <Button Name="btnPieReport" Style="{StaticResource btn-transparent}" Click="btnPieReport_Click">
+                <Image Style="{StaticResource imgReportPie}" />
+            </Button>
+        </StackPanel>
+        <local:GridReport Style="{StaticResource rptReadings}" Grid.Row="0" Grid.Column="0"/>
+        <StackPanel Style="{StaticResource rptLine}" Grid.Row="0" Grid.Column="0">
+            <lvc:CartesianChart>
+                <lvc:CartesianChart.AxisX>
+                    <lvc:Axis Title="Time in Day"></lvc:Axis>
+                </lvc:CartesianChart.AxisX>
+                <lvc:CartesianChart.AxisY>
+                    <lvc:Axis Title="Systolic Blood Pressure (mmHg)"></lvc:Axis>
+                </lvc:CartesianChart.AxisY>
+            </lvc:CartesianChart>
+        </StackPanel>
+        <local:BarReport Style="{StaticResource rptBar}" Grid.Row="0" Grid.Column="0" />
+        <StackPanel Style="{StaticResource rptPie}" Grid.Row="0" Grid.Column="0">
+            <lvc:PieChart>
+                
+            </lvc:PieChart>
+        </StackPanel>
+    </Grid>
 </Page>

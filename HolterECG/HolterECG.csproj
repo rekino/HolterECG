@@ -34,11 +34,11 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="OxyPlot">
-      <HintPath>..\packages\OxyPlot.Core.1.0.0\lib\net45\OxyPlot.dll</HintPath>
+    <Reference Include="LiveCharts">
+      <HintPath>..\packages\LiveCharts.0.9.7\lib\net45\LiveCharts.dll</HintPath>
     </Reference>
-    <Reference Include="OxyPlot.Wpf">
-      <HintPath>..\packages\OxyPlot.Wpf.1.0.0\lib\net45\OxyPlot.Wpf.dll</HintPath>
+    <Reference Include="LiveCharts.Wpf">
+      <HintPath>..\packages\LiveCharts.Wpf.0.9.7\lib\net45\LiveCharts.Wpf.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -62,6 +62,15 @@
     <Compile Include="AddPatientPage.xaml.cs">
       <DependentUpon>AddPatientPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\BarReport.xaml.cs">
+      <DependentUpon>BarReport.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\GridReport.xaml.cs">
+      <DependentUpon>GridReport.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\PieReport.xaml.cs">
+      <DependentUpon>PieReport.xaml</DependentUpon>
+    </Compile>
     <Compile Include="DataStructures\Patient.cs" />
     <Compile Include="ManualPressurePage.xaml.cs">
       <DependentUpon>ManualPressurePage.xaml</DependentUpon>
@@ -71,6 +80,18 @@
     </Compile>
     <Compile Include="DataStructures\State.cs" />
     <Page Include="AddPatientPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\BarReport.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\GridReport.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\PieReport.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

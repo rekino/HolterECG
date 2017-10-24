@@ -3,32 +3,36 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using OxyPlot;
 using System.Collections.ObjectModel;
+using HolterECG.DataStructures;
 
 namespace HolterECG
 {
     enum ReportType { Text, Line, Bar, Pie }
+    class HomeState : System.ComponentModel.INotifyPropertyChanged
+    {
+        ReportType _activeReport = ReportType.Text;
+        public ReportType ActiveReport
+        {
+            get { return _activeReport; }
+            set
+            {
+                _activeReport = value;
+                this.PropertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs("ActiveReport"));
+            }
+        }
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+    }
     class State : System.ComponentModel.INotifyPropertyChanged
     {
         string _route = "ReportPage.xaml";
-        ReportType _activeReport = ReportType.Text;
         bool _isConnected = false;
         public State()
         {
-            this.Points = new ObservableCollection<DataPoint>
-                              {
-                                  new DataPoint(0, 4),
-                                  new DataPoint(10, 13),
-                                  new DataPoint(20, 15),
-                                  new DataPoint(30, 16),
-                                  new DataPoint(40, 12),
-                                  new DataPoint(50, 12)
-                              };
-            this.ActiveFile = new System.Windows.Data.XmlDataProvider();
+            this._activePatient = new Patient();
+            this.Home = new HomeState();
         }
-
-        public ObservableCollection<DataPoint> Points { get; private set; }
+        public HomeState Home { get; private set; }
         public string Route
         {
             get { return _route; }
@@ -36,14 +40,6 @@ namespace HolterECG
             {
                 _route = value;
                 this.PropertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs("Route"));
-            }
-        }
-        public ReportType ActiveReport
-        {
-            get { return _activeReport; }
-            set { 
-                _activeReport = value;
-                this.PropertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs("ActiveReport"));
             }
         }
         public bool IsConnected
@@ -55,9 +51,16 @@ namespace HolterECG
                 this.PropertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs("IsConnected"));
             }
         }
-        public System.Windows.Data.XmlDataProvider ActiveFile { get; private set; }
+        private Patient _activePatient;
 
-        
+        public Patient ActivePatient
+        {
+            get { return _activePatient; }
+            set { 
+                _activePatient = value;
+                this.PropertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs("ActivePatient"));
+            }
+        }
 
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
     }

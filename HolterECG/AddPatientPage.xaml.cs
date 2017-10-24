@@ -23,11 +23,11 @@ namespace HolterECG
     /// </summary>
     public partial class AddPatientPage : Page
     {
-        State state;
+        State _state;
         public AddPatientPage()
         {
             InitializeComponent();
-            state = Application.Current.FindResource("state") as State;
+            _state = Application.Current.FindResource("state") as State;
         }
 
         private void btnAddPatient_Click(object sender, RoutedEventArgs e)
@@ -53,7 +53,7 @@ namespace HolterECG
             string fileName = System.AppDomain.CurrentDomain.BaseDirectory + string.Format(@"\files\{0}-{1}-{2}.xml", patient.FirstName, patient.LastName, DateTime.Now.ToString("yyyy-MM-dd"));
 
             xml.Save(fileName);
-            state.ActiveFile.Source = new Uri(fileName);
+            _state.ActivePatient = patient;
         }
     }
 }
