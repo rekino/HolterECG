@@ -9,7 +9,6 @@
              d:DesignHeight="300" d:DesignWidth="300">
     <UserControl.Resources>
         <Style x:Key="big-chart" BasedOn="{StaticResource chart}" TargetType="lvc:CartesianChart">
-            <Setter Property="DisableAnimations" Value="True"/>
             <Setter Property="Hoverable" Value="False" />
         </Style>
     </UserControl.Resources>

@@ -4,32 +4,35 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+             xmlns:local="clr-namespace:HolterECG.Controls"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300"
-             Loaded="UserControl_Loaded">
+             d:DesignHeight="300" d:DesignWidth="300">
     <UniformGrid Rows="3" Margin="0 5 0 5">
-        <lvc:CartesianChart Name="chartSys" Style="{StaticResource chart}" Grid.Row="0">
+        <UniformGrid.DataContext>
+            <local:BarReportModel />
+        </UniformGrid.DataContext>
+        <lvc:CartesianChart Style="{StaticResource chart}" Grid.Row="0" Series="{Binding Path=Systolic}">
             <lvc:CartesianChart.AxisX>
                 <lvc:Axis Style="{StaticResource axis}" Title="Systolic Blood Pressure (mmHg)" />
             </lvc:CartesianChart.AxisX>
             <lvc:CartesianChart.AxisY>
-                <lvc:Axis Style="{StaticResource axis}" Title="Percentage" />
+                <lvc:Axis Style="{StaticResource axis}" LabelFormatter="{Binding Path=YFormatter}"/>
             </lvc:CartesianChart.AxisY>
         </lvc:CartesianChart>
-        <lvc:CartesianChart Name="chartDia" Style="{StaticResource chart}" Grid.Row="1">
+        <lvc:CartesianChart Style="{StaticResource chart}" Grid.Row="1" Series="{Binding Path=Diastolic}">
             <lvc:CartesianChart.AxisX>
                 <lvc:Axis Style="{StaticResource axis}" Title="Diastolic Blood Pressure (mmHg)"></lvc:Axis>
             </lvc:CartesianChart.AxisX>
             <lvc:CartesianChart.AxisY>
-                <lvc:Axis Style="{StaticResource axis}" Title="Percentage"></lvc:Axis>
+                <lvc:Axis Style="{StaticResource axis}" LabelFormatter="{Binding Path=YFormatter}"></lvc:Axis>
             </lvc:CartesianChart.AxisY>
         </lvc:CartesianChart>
-        <lvc:CartesianChart Name="chartHr" Style="{StaticResource chart}" Grid.Row="2">
+        <lvc:CartesianChart Style="{StaticResource chart}" Grid.Row="2" Series="{Binding Path=HeartRate}">
             <lvc:CartesianChart.AxisX>
                 <lvc:Axis Style="{StaticResource axis}" Title="Heart Rate (bpm)" Labels="{}"></lvc:Axis>
             </lvc:CartesianChart.AxisX>
             <lvc:CartesianChart.AxisY>
-                <lvc:Axis Style="{StaticResource axis}" Title="Percentage"></lvc:Axis>
+                <lvc:Axis Style="{StaticResource axis}" LabelFormatter="{Binding Path=YFormatter}"></lvc:Axis>
             </lvc:CartesianChart.AxisY>
         </lvc:CartesianChart>
     </UniformGrid>

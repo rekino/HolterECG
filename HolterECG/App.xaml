@@ -64,6 +64,7 @@
         <Style x:Key="chart" TargetType="lvc:CartesianChart">
             <Setter Property="Background" Value="White"/>
             <Setter Property="Margin" Value="0 5 0 5" />
+            <Setter Property="DisableAnimations" Value="True"/>
         </Style>
         
         <local:State x:Key="state" />
