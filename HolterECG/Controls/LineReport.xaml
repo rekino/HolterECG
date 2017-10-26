@@ -10,10 +10,10 @@
     <UniformGrid Rows="1">
         <lvc:CartesianChart Name="chartSys" Style="{StaticResource chart}" Grid.Row="0">
             <lvc:CartesianChart.AxisX>
-                <lvc:Axis Style="{StaticResource axis}" Title="Systolic Blood Pressure (mmHg)" />
+                <lvc:Axis Name="axis_x" Style="{StaticResource axis}" Title="Time" />
             </lvc:CartesianChart.AxisX>
             <lvc:CartesianChart.AxisY>
-                <lvc:Axis Style="{StaticResource axis}" Title="Percentage" />
+                <lvc:Axis Style="{StaticResource axis}" Title="mmHg" />
             </lvc:CartesianChart.AxisY>
         </lvc:CartesianChart>
     </UniformGrid>
