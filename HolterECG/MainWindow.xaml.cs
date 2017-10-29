@@ -42,5 +42,10 @@ namespace HolterECG
         {
             state.Route = "ManualPressurePage.xaml";
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            state.Route = "CommentPage.xaml";
+        }
     }
 }

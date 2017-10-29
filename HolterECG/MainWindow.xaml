@@ -90,7 +90,7 @@
                     <Image Grid.Column="2" Source="{StaticResource icoPrint}" />
                 </Grid>
             </Button>
-            <Button Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Style="{StaticResource btn-menu}" Background="#FFCA10">
+            <Button Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Style="{StaticResource btn-menu}" Background="#FFCA10" Click="Button_Click">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" />

@@ -62,6 +62,9 @@
     <Compile Include="AddPatientPage.xaml.cs">
       <DependentUpon>AddPatientPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="CommentPage.xaml.cs">
+      <DependentUpon>CommentPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\BarReport.xaml.cs">
       <DependentUpon>BarReport.xaml</DependentUpon>
     </Compile>
@@ -83,6 +86,10 @@
     </Compile>
     <Compile Include="DataStructures\State.cs" />
     <Page Include="AddPatientPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CommentPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

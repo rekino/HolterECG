@@ -29,7 +29,7 @@ namespace HolterECG
         bool _isConnected = false;
         public State()
         {
-            this._activePatient = new Patient();
+            this._activePatient = new Patient { FirstName = "Ramin", LastName = "Barati" };
             this.Home = new HomeState();
         }
         public HomeState Home { get; private set; }
