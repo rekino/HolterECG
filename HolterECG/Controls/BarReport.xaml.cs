@@ -1,8 +1,10 @@
 ﻿using HolterECG.DataStructures;
 using LiveCharts;
+using LiveCharts.Configurations;
 using LiveCharts.Wpf;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -29,12 +31,20 @@ namespace HolterECG.Controls
             this.Diastolic = new SeriesCollection();
             this.HeartRate = new SeriesCollection();
 
-            this.YFormatter = value => String.Format("%{0}", value * 100);
+            this.YFormatter = value => String.Format("{0:P}", value);
 
-            var totalBuckets = 10;
+            var bucketSize = 10;
             List<double> syss = new List<double>();
             List<double> dias = new List<double>();
             List<double> hrs = new List<double>();
+            List<string> xlabels = new List<string>();
+            int xStart = 50;
+            while (xStart <= 210)
+            {
+                xlabels.Add(xStart.ToString());
+                xStart += bucketSize;
+            }
+            this.XLabels = xlabels.ToArray();
 
             foreach (Reading reading in _state.ActivePatient.Readings)
             {
@@ -43,18 +53,20 @@ namespace HolterECG.Controls
                 hrs.Add(reading.HR);
             }
 
+            var totalBuckets = 17;
             Systolic.Add(CreateHistogram(syss, totalBuckets, "Systolic Blood Pressure", Brushes.Red));
             Diastolic.Add(CreateHistogram(dias, totalBuckets, "Diastolic Blood Pressure", Brushes.Green));
             HeartRate.Add(CreateHistogram(hrs, totalBuckets, "Heart Rate", Brushes.Blue));
         }
         ColumnSeries CreateHistogram(IEnumerable<double> data, int totalBuckets, string title, Brush fill)
         {
-            var min = data.Min();
-            var max = data.Max();
+            var min = 45;
+            var max = 215;
             var buckets = new double[totalBuckets];
             var unit = 1.0 / data.Count();
 
             var bucketSize = (max - min) / totalBuckets;
+
             foreach (var value in data)
             {
                 int bucketIndex = 0;
@@ -68,7 +80,17 @@ namespace HolterECG.Controls
                 }
                 buckets[bucketIndex] += unit;
             }
-            ColumnSeries series = new ColumnSeries { Title = title, Fill = fill };
+
+
+            ColumnSeries series = new ColumnSeries
+            {
+                Title = title,
+                Fill = fill,
+                DataLabels = true,
+                LabelPoint = point => point.Y != 0 ? String.Format("{0:P}", point.Y) : "",
+                MaxColumnWidth = double.PositiveInfinity,
+                ColumnPadding = 1
+            };
             series.Values = new ChartValues<double>(buckets);
             return series;
         }
@@ -82,6 +104,8 @@ namespace HolterECG.Controls
         public SeriesCollection Diastolic { get; private set; }
         public SeriesCollection HeartRate { get; private set; }
         public Func<double, string> YFormatter { get; private set; }
+        public string[] XLabels { get; private set; }
+
     }
     /// <summary>
     /// Interaction logic for BarReport.xaml

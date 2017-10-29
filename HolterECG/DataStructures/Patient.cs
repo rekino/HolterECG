@@ -70,8 +70,8 @@ namespace HolterECG.DataStructures
             Random rand = new Random();
             for (int i = 0; i < 70; i++)
             {
-                Readings.Add(new Reading { Date=DateTime.Now.AddHours(i), HR=rand.NextDouble(),
-                    Dia=rand.NextDouble(), MABP=rand.NextDouble(), Sys=rand.NextDouble() });
+                Readings.Add(new Reading { Date=DateTime.Now.AddHours(i), HR=rand.NextDouble() * 160 + 50,
+                    Dia=rand.NextDouble() * 160 + 50, MABP=rand.NextDouble() * 160 + 50, Sys=rand.NextDouble() * 160 + 50 });
             }
         }
         public string Serialize()
