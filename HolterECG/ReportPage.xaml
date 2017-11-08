@@ -126,6 +126,7 @@
         <local:GridReport Style="{StaticResource rptReadings}" Grid.Row="0" Grid.Column="0"/>
         <local:LineReport Style="{StaticResource rptLine}" Grid.Row="0" Grid.Column="0"/>
         <local:BarReport Style="{StaticResource rptBar}" Grid.Row="0" Grid.Column="0" />
+        <local:PieReport Style="{StaticResource rptPie}" Grid.Row="0" Grid.Column="0" />
         <StackPanel Style="{StaticResource rptPie}" Grid.Row="0" Grid.Column="0">
             <lvc:PieChart>
                 

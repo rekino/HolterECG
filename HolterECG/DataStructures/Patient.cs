@@ -62,6 +62,7 @@ namespace HolterECG.DataStructures
         public string Symptoms { get; set; }
         public string Medications { get; set; }
         public string MoreInformation { get; set; }
+        public string Comments { get; set; }
         public List<Reading> Readings { get; private set; }
 
         public Patient()
@@ -88,6 +89,34 @@ namespace HolterECG.DataStructures
                 serializer.Serialize(writer, this, xmlns);
             }
             return sw.ToString();
+        }
+
+        public double[] GetSystolicReadings()
+        {
+            List<double> syss = new List<double>();
+            foreach (Reading reading in this.Readings)
+            {
+                syss.Add(reading.Sys);
+            }
+            return syss.ToArray();
+        }
+        public double[] GetDiastolicReadings()
+        {
+            List<double> dias = new List<double>();
+            foreach (Reading reading in this.Readings)
+            {
+                dias.Add(reading.Dia);
+            }
+            return dias.ToArray();
+        }
+        public double[] GetHeartRateReadings()
+        {
+            List<double> hrs = new List<double>();
+            foreach (Reading reading in this.Readings)
+            {
+                hrs.Add(reading.HR);
+            }
+            return hrs.ToArray();
         }
 
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;

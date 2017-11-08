@@ -34,9 +34,9 @@ namespace HolterECG.Controls
             this.YFormatter = value => String.Format("{0:P}", value);
 
             var bucketSize = 10;
-            List<double> syss = new List<double>();
-            List<double> dias = new List<double>();
-            List<double> hrs = new List<double>();
+            double[] syss = _state.ActivePatient.GetSystolicReadings();
+            double[] dias = _state.ActivePatient.GetDiastolicReadings();
+            double[] hrs = _state.ActivePatient.GetHeartRateReadings();
             List<string> xlabels = new List<string>();
             int xStart = 50;
             while (xStart <= 210)
@@ -45,13 +45,6 @@ namespace HolterECG.Controls
                 xStart += bucketSize;
             }
             this.XLabels = xlabels.ToArray();
-
-            foreach (Reading reading in _state.ActivePatient.Readings)
-            {
-                syss.Add(reading.Sys);
-                dias.Add(reading.Dia);
-                hrs.Add(reading.HR);
-            }
 
             var totalBuckets = 17;
             Systolic.Add(CreateHistogram(syss, totalBuckets, "Systolic Blood Pressure", Brushes.Red));
