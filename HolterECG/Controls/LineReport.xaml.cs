@@ -29,18 +29,18 @@ namespace HolterECG.Controls
             this.PressureSeries = new SeriesCollection();
             this.PressureSeriesSummary = new SeriesCollection();
 
-            LineSeries lineSystolic = new LineSeries { Title = "Systolic Blood Pressure" };
+            LineSeries lineSystolic = new LineSeries { Title = "Systolic Blood Pressure", LineSmoothness = 0 };
             lineSystolic.Values = new ChartValues<DateTimePoint>();
-            LineSeries lineDiastolic = new LineSeries { Title = "Diastolic Blood Pressure" };
+            LineSeries lineDiastolic = new LineSeries { Title = "Diastolic Blood Pressure", LineSmoothness = 0 };
             lineDiastolic.Values = new ChartValues<DateTimePoint>();
-            LineSeries lineMabp = new LineSeries { Title = "MABP" };
+            LineSeries lineMabp = new LineSeries { Title = "MABP", LineSmoothness = 0 };
             lineMabp.Values = new ChartValues<DateTimePoint>();
 
-            LineSeries lineSystolicSummary = new LineSeries { Title = "Systolic Blood Pressure", PointGeometry=null };
+            LineSeries lineSystolicSummary = new LineSeries { Title = "Systolic Blood Pressure", PointGeometry = null, LineSmoothness = 0 };
             lineSystolicSummary.Values = new ChartValues<DateTimePoint>();
-            LineSeries lineDiastolicSummary = new LineSeries { Title = "Diastolic Blood Pressure", PointGeometry = null };
+            LineSeries lineDiastolicSummary = new LineSeries { Title = "Diastolic Blood Pressure", PointGeometry = null, LineSmoothness = 0 };
             lineDiastolicSummary.Values = new ChartValues<DateTimePoint>();
-            LineSeries lineMabpSummary = new LineSeries { Title = "MABP", PointGeometry = null };
+            LineSeries lineMabpSummary = new LineSeries { Title = "MABP", PointGeometry = null, LineSmoothness = 0 };
             lineMabpSummary.Values = new ChartValues<DateTimePoint>();
 
             this.From = _state.ActivePatient.Readings[0].Date.Ticks;

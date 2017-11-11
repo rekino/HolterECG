@@ -101,7 +101,7 @@
                     <Image Grid.Column="2" Source="{StaticResource icoAddReport}" />
                 </Grid>
             </Button>
-            <Button Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" Style="{StaticResource btn-menu}" Background="#AB8E4C">
+            <Button Name="btnSettings" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" Style="{StaticResource btn-menu}" Background="#AB8E4C" Click="btnSettings_Click">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" />

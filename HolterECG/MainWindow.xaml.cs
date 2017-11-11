@@ -47,5 +47,10 @@ namespace HolterECG
         {
             state.Route = "CommentPage.xaml";
         }
+
+        private void btnSettings_Click(object sender, RoutedEventArgs e)
+        {
+            state.Route = "SettingsPage.xaml";
+        }
     }
 }
