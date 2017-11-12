@@ -45,6 +45,10 @@
             <Setter Property="HorizontalContentAlignment" Value="Right" />
             <Setter Property="VerticalContentAlignment" Value="Top" />
         </Style>
+        <Style x:Key="label-centerright" TargetType="Label" BasedOn="{StaticResource label}">
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="HorizontalContentAlignment" Value="Right" />
+        </Style>
         <Style x:Key="txt-box" TargetType="Control">
             <Setter Property="Margin" Value="5" />
             <Setter Property="Padding" Value="5" />
@@ -73,10 +77,10 @@
         </Style>
         
         <local:State x:Key="state" />
-        <ObjectDataProvider x:Key="protocols" MethodName="GetValues" ObjectType="{x:Type sys:Enum}">
-            <ObjectDataProvider.MethodParameters>
-                <x:Type TypeName="localdata:AnalysisProtocol" />
-            </ObjectDataProvider.MethodParameters>
-        </ObjectDataProvider>
+        <x:Array x:Key="protocols" Type="sys:String">
+            <sys:String>ESH/ESC (WHO)</sys:String>
+            <sys:String>AHA</sys:String>
+            <sys:String>JNC8</sys:String>
+        </x:Array>
     </Application.Resources>
 </Application>

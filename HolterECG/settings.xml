@@ -1,0 +1,13 @@
+﻿<?xml version="1.0"?>
+<ArrayOfSettings>
+  <Settings name="Default">
+    <PressureBalance>180</PressureBalance>
+    <NightStart>11:00 PM</NightStart>
+    <NightEnd>7:00 AM</NightEnd>
+    <NightCycleSpan>01:00:00</NightCycleSpan>
+    <DayCycleSpan>00:20:00</DayCycleSpan>
+    <Delay>00:20:00</Delay>
+    <Duration>1.00:00:00</Duration>
+    <Protocol>ESH/ESC (WHO)</Protocol>
+  </Settings>
+</ArrayOfSettings>
