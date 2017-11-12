@@ -83,6 +83,9 @@
     <Compile Include="CommentPage.xaml.cs">
       <DependentUpon>CommentPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\AnalysisReport.xaml.cs">
+      <DependentUpon>AnalysisReport.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\BarReport.xaml.cs">
       <DependentUpon>BarReport.xaml</DependentUpon>
     </Compile>
@@ -112,6 +115,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="CommentPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\AnalysisReport.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

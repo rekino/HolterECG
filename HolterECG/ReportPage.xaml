@@ -20,6 +20,8 @@
         <BitmapImage x:Key="icoReport3on" UriSource="/assets/Report3on.png" />
         <BitmapImage x:Key="icoReport4off" UriSource="/assets/Report4off.png" />
         <BitmapImage x:Key="icoReport4on" UriSource="/assets/Report4on.png" />
+        <BitmapImage x:Key="icoReport5off" UriSource="/assets/Report5off.png" />
+        <BitmapImage x:Key="icoReport5on" UriSource="/assets/Report5on.png" />
         <Style x:Key="imgReportText" TargetType="Image">
             <Style.Triggers>
                 <DataTrigger Binding="{Binding Path=Home.ActiveReport}" Value="0">
@@ -58,6 +60,16 @@
             </Style.Triggers>
             <Style.Setters>
                 <Setter Property="Source" Value="{StaticResource icoReport4off}" />
+            </Style.Setters>
+        </Style>
+        <Style x:Key="imgReportAnalysis" TargetType="Image">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Path=Home.ActiveReport}" Value="4">
+                    <Setter Property="Source" Value="{StaticResource icoReport5on}" />
+                </DataTrigger>
+            </Style.Triggers>
+            <Style.Setters>
+                <Setter Property="Source" Value="{StaticResource icoReport5off}" />
             </Style.Setters>
         </Style>
         <Style x:Key="rptReadings" TargetType="FrameworkElement">
@@ -100,6 +112,16 @@
                 <Setter Property="Visibility" Value="Hidden" />
             </Style.Setters>
         </Style>
+        <Style x:Key="rptAnalysis" TargetType="FrameworkElement">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Path=Home.ActiveReport}" Value="4">
+                    <Setter Property="Visibility" Value="Visible" />
+                </DataTrigger>
+            </Style.Triggers>
+            <Style.Setters>
+                <Setter Property="Visibility" Value="Hidden" />
+            </Style.Setters>
+        </Style>
     </Page.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -122,11 +144,15 @@
             <Button Name="btnPieReport" Style="{StaticResource btn-transparent}" Click="btnPieReport_Click">
                 <Image Style="{StaticResource imgReportPie}" />
             </Button>
+            <Button Name="btnAnalysisReport" Style="{StaticResource btn-transparent}" Click="btnAnalysisReport_Click">
+                <Image Style="{StaticResource imgReportAnalysis}" />
+            </Button>
         </StackPanel>
         <local:GridReport Style="{StaticResource rptReadings}" Grid.Row="0" Grid.Column="0"/>
         <local:LineReport Style="{StaticResource rptLine}" Grid.Row="0" Grid.Column="0"/>
         <local:BarReport Style="{StaticResource rptBar}" Grid.Row="0" Grid.Column="0" />
         <local:PieReport Style="{StaticResource rptPie}" Grid.Row="0" Grid.Column="0" />
+        <local:AnalysisReport Style="{StaticResource rptAnalysis}" Grid.Row="0" Grid.Column="0" />
         <StackPanel Style="{StaticResource rptPie}" Grid.Row="0" Grid.Column="0">
             <lvc:PieChart>
                 

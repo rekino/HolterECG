@@ -60,5 +60,10 @@ namespace HolterECG
         {
             _state.Home.ActiveReport = ReportType.Pie;
         }
+
+        private void btnAnalysisReport_Click(object sender, RoutedEventArgs e)
+        {
+            _state.Home.ActiveReport = ReportType.Analysis;
+        }
     }
 }

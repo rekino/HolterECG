@@ -8,7 +8,7 @@ using HolterECG.DataStructures;
 
 namespace HolterECG
 {
-    enum ReportType { Text, Line, Bar, Pie }
+    enum ReportType { Text, Line, Bar, Pie, Analysis }
     class HomeState : System.ComponentModel.INotifyPropertyChanged
     {
         ReportType _activeReport = ReportType.Text;
