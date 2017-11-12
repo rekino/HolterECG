@@ -5,14 +5,15 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
              xmlns:local="clr-namespace:HolterECG.Controls"
+             xmlns:xcd="clr-namespace:Xceed.Wpf.Toolkit;assembly=Xceed.Wpf.Toolkit"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="600" d:DesignWidth="800">
     <UserControl.Resources>
         <Style x:Key="pie" TargetType="lvc:PieChart">
             <Setter Property="DataTooltip" Value="{x:Null}" />
             <Setter Property="DisableAnimations" Value="True" />
         </Style>
-        <Style x:Key="grid" TargetType="Grid">
+        <Style x:Key="grid" TargetType="UniformGrid">
             <Setter Property="Background">
                 <Setter.Value>
                     <SolidColorBrush Color="{StaticResource colorWheat}" />
@@ -21,18 +22,174 @@
             <Setter Property="Margin" Value="0 5 0 5" />
         </Style>
     </UserControl.Resources>
-    <UniformGrid Rows="3">
+    <UniformGrid Name="grdTop" Rows="3">
         <UniformGrid.DataContext>
             <local:PieReportModel />
         </UniformGrid.DataContext>
-        <Grid Style="{StaticResource grid}">
-            <lvc:PieChart Style="{StaticResource pie}" Series="{Binding Path=Systolic}" />
-        </Grid>
-        <Grid Style="{StaticResource grid}">
-            <lvc:PieChart Style="{StaticResource pie}" Series="{Binding Path=Diastolic}"/>
-        </Grid>
-        <Grid Style="{StaticResource grid}">
-            <lvc:PieChart Style="{StaticResource pie}" Series="{Binding Path=HeartRate}" />
-        </Grid>
+        <UniformGrid Style="{StaticResource grid}" Columns="3">
+            <Grid Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="1*" />
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0" FontWeight="Bold">Systolic Blood Pressure (mmHg)</Label>
+                <StackPanel Grid.Row="1" VerticalAlignment="Center">
+                    <Label>Maximum Value = 210 mmHg</Label>
+                    <Label>Minimum Value = 110 mmHg</Label>
+                    <Label>Average Value = 160 mmHg</Label>
+                </StackPanel>
+            </Grid>
+            <lvc:PieChart Style="{StaticResource pie}" Grid.Column="1" Series="{Binding Path=Systolic}" />
+            <Grid Grid.Column="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <StackPanel Grid.Row="0" VerticalAlignment="Center">
+                    <UniformGrid Columns="2">
+                        <StackPanel Orientation="Horizontal">
+                            <Canvas Width="10" VerticalAlignment="Center">
+                                <Rectangle Width="10" Height="10" Fill="Red" Canvas.Top="-5"/>
+                            </Canvas>
+                            <Label>Maximum: </Label>
+                        </StackPanel>
+                        <xcd:ByteUpDown Name="budSysMax" Value="{Binding Path=SysMax, Mode=TwoWay}" />
+                    </UniformGrid>
+                    <UniformGrid Columns="2">
+                        <StackPanel Orientation="Horizontal">
+                            <Canvas Width="10" VerticalAlignment="Center">
+                                <Rectangle Width="10" Height="10" Fill="Green" Canvas.Top="-5"/>
+                            </Canvas>
+                            <Label>Normal:</Label>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="{Binding ElementName=budSysMin, Path=Value}" />
+                            <Label>to</Label>
+                            <Label Content="{Binding ElementName=budSysMax, Path=Value}" />
+                        </StackPanel>
+                    </UniformGrid>
+                    <UniformGrid Columns="2">
+                        <StackPanel Orientation="Horizontal">
+                            <Canvas Width="10" VerticalAlignment="Center">
+                                <Rectangle Width="10" Height="10" Fill="Blue" Canvas.Top="-5"/>
+                            </Canvas>
+                            <Label>Minimum:</Label>
+                        </StackPanel>
+                        <xcd:ByteUpDown Name="budSysMin" Value="{Binding Path=SysMin, Mode=TwoWay}" />
+                    </UniformGrid>
+                </StackPanel>
+                <Button Grid.Row="1" Click="setSysDefaults">Set to Defaults</Button>
+            </Grid>
+        </UniformGrid>
+        <UniformGrid Style="{StaticResource grid}" Columns="3">
+            <Grid Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="1*" />
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0" FontWeight="Bold">Diastolic Blood Pressure (mmHg)</Label>
+                <StackPanel Grid.Row="1" VerticalAlignment="Center">
+                    <Label>Maximum Value = 110 mmHg</Label>
+                    <Label>Minimum Value = 60 mmHg</Label>
+                    <Label>Average Value = 85 mmHg</Label>
+                </StackPanel>
+            </Grid>
+            <lvc:PieChart Style="{StaticResource pie}" Grid.Column="1" Series="{Binding Path=Diastolic}" />
+            <Grid Grid.Column="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <StackPanel Grid.Row="0" VerticalAlignment="Center">
+                    <UniformGrid Columns="2">
+                        <StackPanel Orientation="Horizontal">
+                            <Canvas Width="10" VerticalAlignment="Center">
+                                <Rectangle Width="10" Height="10" Fill="Red" Canvas.Top="-5"/>
+                            </Canvas>
+                            <Label>Maximum:</Label>
+                        </StackPanel>
+                        <xcd:ByteUpDown Name="budDiaMax" Value="{Binding Path=DiaMax, Mode=TwoWay}" />
+                    </UniformGrid>
+                    <UniformGrid Columns="2">
+                        <StackPanel Orientation="Horizontal">
+                            <Canvas Width="10" VerticalAlignment="Center">
+                                <Rectangle Width="10" Height="10" Fill="Green" Canvas.Top="-5"/>
+                            </Canvas>
+                            <Label>Normal:</Label>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="{Binding ElementName=budDiaMin, Path=Value}" />
+                            <Label>to</Label>
+                            <Label Content="{Binding ElementName=budDiaMax, Path=Value}" />
+                        </StackPanel>
+                    </UniformGrid>
+                    <UniformGrid Columns="2">
+                        <StackPanel Orientation="Horizontal">
+                            <Canvas Width="10" VerticalAlignment="Center">
+                                <Rectangle Width="10" Height="10" Fill="Blue" Canvas.Top="-5"/>
+                            </Canvas>
+                            <Label>Minimum:</Label>
+                        </StackPanel>
+                        <xcd:ByteUpDown Name="budDiaMin" Value="{Binding Path=DiaMin, Mode=TwoWay}" />
+                    </UniformGrid>
+                </StackPanel>
+                <Button Grid.Row="1" Click="setDiaDefaults">Set to Defaults</Button>
+            </Grid>
+        </UniformGrid>
+        <UniformGrid Style="{StaticResource grid}" Columns="3">
+            <Grid Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="1*" />
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0" FontWeight="Bold">Heart Rate (bpm)</Label>
+                <StackPanel Grid.Row="1" VerticalAlignment="Center">
+                    <Label>Maximum Value = 136 bpm</Label>
+                    <Label>Minimum Value = 52 bpm</Label>
+                    <Label>Average Value = 94 bpm</Label>
+                </StackPanel>
+            </Grid>
+            <lvc:PieChart Style="{StaticResource pie}" Grid.Column="1" Series="{Binding Path=HeartRate}" />
+            <Grid Grid.Column="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <StackPanel Grid.Row="0" VerticalAlignment="Center">
+                    <UniformGrid Columns="2">
+                        <StackPanel Orientation="Horizontal">
+                            <Canvas Width="10" VerticalAlignment="Center">
+                                <Rectangle Width="10" Height="10" Fill="Red" Canvas.Top="-5"/>
+                            </Canvas>
+                            <Label>Maximum:</Label>
+                        </StackPanel>
+                        <xcd:ByteUpDown Name="budHrMax" Value="{Binding Path=HrMax, Mode=TwoWay}" />
+                    </UniformGrid>
+                    <UniformGrid Columns="2">
+                        <StackPanel Orientation="Horizontal">
+                            <Canvas Width="10" VerticalAlignment="Center">
+                                <Rectangle Width="10" Height="10" Fill="Green" Canvas.Top="-5"/>
+                            </Canvas>
+                            <Label>Normal:</Label>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="{Binding ElementName=budHrMin, Path=Value}" />
+                            <Label>to</Label>
+                            <Label Content="{Binding ElementName=budHrMax, Path=Value}" />
+                        </StackPanel>
+                    </UniformGrid>
+                    <UniformGrid Columns="2">
+                        <StackPanel Orientation="Horizontal">
+                            <Canvas Width="10" VerticalAlignment="Center">
+                                <Rectangle Width="10" Height="10" Fill="Blue" Canvas.Top="-5"/>
+                            </Canvas>
+                            <Label>Minimum:</Label>
+                        </StackPanel>
+                        <xcd:ByteUpDown Name="budHrMin" Value="{Binding Path=HrMin, Mode=TwoWay}" />
+                    </UniformGrid>
+                </StackPanel>
+                <Button Grid.Row="1" Click="setHrDefaults">Set to Defaults</Button>
+            </Grid>
+        </UniformGrid>
     </UniformGrid>
 </UserControl>
