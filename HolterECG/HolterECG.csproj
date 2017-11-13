@@ -99,9 +99,13 @@
       <DependentUpon>PieReport.xaml</DependentUpon>
     </Compile>
     <Compile Include="DataStructures\Patient.cs" />
+    <Compile Include="DataStructures\Report.cs" />
     <Compile Include="DataStructures\Settings.cs" />
     <Compile Include="ManualPressurePage.xaml.cs">
       <DependentUpon>ManualPressurePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PaperReport.xaml.cs">
+      <DependentUpon>PaperReport.xaml</DependentUpon>
     </Compile>
     <Compile Include="ReportPage.xaml.cs">
       <DependentUpon>ReportPage.xaml</DependentUpon>
@@ -151,6 +155,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="ManualPressurePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PaperReport.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

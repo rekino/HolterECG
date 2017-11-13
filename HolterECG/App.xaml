@@ -79,7 +79,7 @@
             <Setter Property="DataTooltip" Value="{x:Null}" />
             <Setter Property="DisableAnimations" Value="True" />
         </Style>
-        
+
         <local:State x:Key="state" />
         <x:Array x:Key="protocols" Type="sys:String">
             <sys:String>ESH/ESC (WHO)</sys:String>

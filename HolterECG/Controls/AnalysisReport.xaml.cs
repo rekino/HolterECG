@@ -212,7 +212,8 @@ namespace HolterECG.Controls
                     Values = new ChartValues<double>(new double[] { slice.Readings.Count / (double)_state.ActivePatient.Readings.Count }),
                     DataLabels = true,
                     LabelPoint = slice.Formatter,
-                    Fill = slice.Fill
+                    Fill = slice.Fill,
+                    Foreground = Brushes.Black
                 });
             }
         }
