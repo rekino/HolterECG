@@ -9,10 +9,6 @@
              mc:Ignorable="d" 
              d:DesignHeight="600" d:DesignWidth="800">
     <UserControl.Resources>
-        <Style x:Key="pie" TargetType="lvc:PieChart">
-            <Setter Property="DataTooltip" Value="{x:Null}" />
-            <Setter Property="DisableAnimations" Value="True" />
-        </Style>
         <Style x:Key="grid" TargetType="UniformGrid">
             <Setter Property="Background">
                 <Setter.Value>
