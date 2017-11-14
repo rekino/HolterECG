@@ -829,7 +829,7 @@
                 <Paragraph>
                     <Span FontWeight="Bold">Medical Diagnosis:</Span>
                     <Span>
-                        <Run Text="{Binding Path=ActivePatient.Comments}" />
+                        <Run Text="{Binding Path=Patient.Comments}" />
                     </Span>
                 </Paragraph>
             </Section>
@@ -906,32 +906,45 @@
                 </BlockUIContainer>
             </Section>
             <Section>
-                <BlockUIContainer>
-                    <StackPanel>
-                        <UniformGrid Columns="6">
-                            <TextBlock>Date</TextBlock>
-                            <TextBlock>Time</TextBlock>
-                            <TextBlock>Sys</TextBlock>
-                            <TextBlock>Dia</TextBlock>
-                            <TextBlock>HR</TextBlock>
-                            <TextBlock>MABP</TextBlock>
-                        </UniformGrid>
-                        <ItemsControl ItemsSource="{Binding Path=ActivePatient.Readings}">
-                            <ItemsControl.ItemTemplate>
-                                <DataTemplate DataType="local:Reading">
-                                    <UniformGrid Columns="6">
-                                        <TextBlock Text="{Binding Path=Date, StringFormat=d}" />
-                                        <TextBlock Text="{Binding Path=Date, StringFormat=t}" />
-                                        <TextBlock Text="{Binding Path=Sys}" />
-                                        <TextBlock Text="{Binding Path=Dia}" />
-                                        <TextBlock Text="{Binding Path=HR}" />
-                                        <TextBlock Text="{Binding Path=MABP}" />
-                                    </UniformGrid>
-                                </DataTemplate>
-                            </ItemsControl.ItemTemplate>
-                        </ItemsControl>
-                    </StackPanel>
-                </BlockUIContainer>
+                <Table>
+                    <Table.Columns>
+                        <TableColumn Width="1cm" />
+                        <TableColumn />
+                        <TableColumn />
+                        <TableColumn />
+                        <TableColumn />
+                        <TableColumn />
+                        <TableColumn />
+                    </Table.Columns>
+                    <TableRowGroup>
+                        <TableRow>
+                            <TableCell>
+                                <Paragraph>#</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>Date</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>Time</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>Sys</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>Dia</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>HR</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>MABP</Paragraph>
+                            </TableCell>
+                        </TableRow>
+                    </TableRowGroup>
+                    <TableRowGroup Name="rows">
+                        
+                    </TableRowGroup>
+                </Table>
             </Section>
         </FlowDocument>
     </FlowDocumentPageViewer>
