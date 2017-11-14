@@ -63,11 +63,11 @@ namespace HolterECG.DataStructures
         public string Medications { get; set; }
         public string MoreInformation { get; set; }
         public string Comments { get; set; }
-        public List<Reading> Readings { get; private set; }
+        public ObservableCollection<Reading> Readings { get; private set; }
 
         public Patient()
         {
-            Readings = new List<Reading>();
+            Readings = new ObservableCollection<Reading>();
             Random rand = new Random();
             for (int i = 0; i < 70; i++)
             {

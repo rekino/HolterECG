@@ -35,7 +35,7 @@ namespace HolterECG
 
         private void btnPrint_Click(object sender, RoutedEventArgs e)
         {
-            state.Route = "ReportPage.xaml";
+            state.Route = "PaperReport.xaml";
         }
 
         private void btnManualBlood_Click(object sender, RoutedEventArgs e)

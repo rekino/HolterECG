@@ -2,16 +2,837 @@
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:HolterECG.DataStructures"
       mc:Ignorable="d" 
-      d:DesignHeight="300" d:DesignWidth="300"
+      d:DesignHeight="1000" d:DesignWidth="900"
 	Title="Paper Report">
-
+    <Page.DataContext>
+        <Binding Source="{StaticResource state}" />
+    </Page.DataContext>
+    <Page.Resources>
+        <Style TargetType="Section">
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="BorderBrush" Value="Black" />
+            <Setter Property="Padding" Value="5" />
+            <Setter Property="Margin" Value="2" />
+        </Style>
+        <Style x:Key="label" TargetType="Span">
+            <Setter Property="FontStyle" Value="Italic" />
+        </Style>
+        <Style x:Key="value" TargetType="Run">
+            <Setter Property="Foreground" Value="Black" />
+        </Style>
+    </Page.Resources>
     <FlowDocumentPageViewer>
-        <FlowDocument ColumnWidth="400" FontSize="14" FontFamily="Georgia">
-            <Paragraph>
-                This is a test
-            </Paragraph>
+        <FlowDocument ColumnWidth="800" FontSize="14" FontFamily="Georgia">
+            <Section Background="Gray">
+                <Paragraph>
+                    <Span Style="{StaticResource label}">Patient Name:</Span>
+                    <Span>
+                        <Run Style="{StaticResource value}" Text="{Binding Path=ActivePatient.FirstName}" />
+                        <Run Style="{StaticResource value}" Text="{Binding Path=ActivePatient.LastName}" />
+                    </Span>
+                    <Span Style="{StaticResource label}">Phone Number:</Span>
+                    <Span>
+                        <Run Style="{StaticResource value}" Text="{Binding Path=ActivePatient.PhoneNumber}" />
+                    </Span>
+                    <Span Style="{StaticResource label}">Age:</Span>
+                    <Span>
+                        <Run Style="{StaticResource value}" Text="{Binding Path=ActivePatient.Age}" />
+                    </Span>
+                    <Span Style="{StaticResource label}">Sex:</Span>
+                    <Span>
+                        <Run Style="{StaticResource value}" Text="{Binding Path=ActivePatient.Sex}" />
+                    </Span>
+                    <Span Style="{StaticResource label}">Height:</Span>
+                    <Span>
+                        <Run Style="{StaticResource value}" Text="{Binding Path=ActivePatient.Height}" />
+                    </Span>
+                    <Span Style="{StaticResource label}">Weight:</Span>
+                    <Span>
+                        <Run Style="{StaticResource value}" Text="{Binding Path=ActivePatient.Weight}" />
+                    </Span>
+                    <Span Style="{StaticResource label}">Physician:</Span>
+                    <Span>
+                        <Run Style="{StaticResource value}" Text="{Binding Path=ActivePatient.Physician}" />
+                    </Span>
+                    <Span Style="{StaticResource label}">Insurance:</Span>
+                    <Span>
+                        <Run Style="{StaticResource value}" Text="{Binding Path=ActivePatient.Insurance}" />
+                    </Span>
+                </Paragraph>
+                <Paragraph>
+                    <Span Style="{StaticResource label}">Medical History:</Span>
+                    <Span>
+                        <Run Style="{StaticResource value}" Text="{Binding Path=ActivePatient.MoreInformation}" />
+                    </Span>
+                </Paragraph>
+                <Paragraph>
+                    <Span Style="{StaticResource label}">Medications:</Span>
+                    <Span>
+                        <Run Style="{StaticResource value}" Text="{Binding Path=ActivePatient.Medications}" />
+                    </Span>
+                </Paragraph>
+                <Paragraph>
+                    <Span Style="{StaticResource label}">Test Start:</Span>
+                    <Span>
+                        <Run Style="{StaticResource value}" Text="1396/07/23 - 16:00" />
+                    </Span>
+                    <Span Style="{StaticResource label}">Test Stop:</Span>
+                    <Span>
+                        <Run Style="{StaticResource value}" Text="1396/07/24 - 16:00" />
+                    </Span>
+                    <Span Style="{StaticResource label}">Number of Samples:</Span>
+                    <Span>
+                        <Run Style="{StaticResource value}" Text="{Binding Path=ActivePatient.Readings.Count, Mode=OneTime}" />
+                    </Span>
+                </Paragraph>
+            </Section>
+            <Section>
+                <Table CellSpacing="0">
+                    <Table.Columns>
+                        <TableColumn />
+                        <TableColumn />
+                        <TableColumn />
+                        <TableColumn />
+                        <TableColumn />
+                        <TableColumn />
+                        <TableColumn />
+                    </Table.Columns>
+                    <TableRowGroup>
+                        <TableRow>
+                            <TableCell ColumnSpan="7">
+                                <Table Margin="0">
+                                    <Table.Columns>
+                                        <TableColumn />
+                                        <TableColumn />
+                                    </Table.Columns>
+                                    <TableRowGroup>
+                                        <TableRow>
+                                            <TableCell>
+                                                <Paragraph>
+                                                    <Span>Overall Statistics:</Span>
+                                                    <Span>Samples=</Span>
+                                                    <Span>
+                                                        <Run>56</Run>
+                                                    </Span>
+                                                    <Span>of</Span>
+                                                    <Span>
+                                                        <Run>56</Run>
+                                                    </Span>
+                                                    <Span>
+                                                        <Run>(100%)</Run>
+                                                    </Span>
+                                                </Paragraph>
+                                            </TableCell>
+                                            <TableCell>
+                                                <Paragraph>
+                                                    Overall BP Load: 62% Sys > 140mmHg &amp; 37% Dia > 90mmHg
+                                                </Paragraph>
+                                            </TableCell>
+                                        </TableRow>
+                                    </TableRowGroup>
+                                </Table>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow>
+                            <TableCell></TableCell>
+                            <TableCell>
+                                <Paragraph>Maximum</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>Time</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>Minimum</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>Time</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>Average</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>Std.Dev.</Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow>
+                            <TableCell>
+                                <Paragraph>Systolic (mmHg)</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>
+                                    <Run>166</Run>
+                                </Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>
+                                    <Run>17:20</Run>
+                                </Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>
+                                    <Run>105</Run>
+                                </Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>
+                                    <Run>03:40</Run>
+                                </Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>
+                                    <Run>142</Run>
+                                </Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>
+                                    <Run>+/- 14.7</Run>
+                                </Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow>
+                            <TableCell>
+                                <Paragraph>Diastolic (mmHg)</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>
+                                    <Run>166</Run>
+                                </Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>
+                                    <Run>17:20</Run>
+                                </Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>
+                                    <Run>105</Run>
+                                </Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>
+                                    <Run>03:40</Run>
+                                </Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>
+                                    <Run>142</Run>
+                                </Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>
+                                    <Run>+/- 14.7</Run>
+                                </Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow>
+                            <TableCell>
+                                <Paragraph>MAP (mmHg)</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>
+                                    <Run>166</Run>
+                                </Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>
+                                    <Run>17:20</Run>
+                                </Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>
+                                    <Run>105</Run>
+                                </Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>
+                                    <Run>03:40</Run>
+                                </Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>
+                                    <Run>142</Run>
+                                </Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>
+                                    <Run>+/- 14.7</Run>
+                                </Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow>
+                            <TableRow.Resources>
+                                <Style TargetType="TableCell">
+                                    <Setter Property="BorderBrush" Value="Black" />
+                                    <Setter Property="BorderThickness" Value="0,0,0,1" />
+                                </Style>
+                            </TableRow.Resources>
+                            <TableCell>
+                                <Paragraph>Heart Rate (BPM)</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>
+                                    <Run>166</Run>
+                                </Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>
+                                    <Run>17:20</Run>
+                                </Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>
+                                    <Run>105</Run>
+                                </Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>
+                                    <Run>03:40</Run>
+                                </Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>
+                                    <Run>142</Run>
+                                </Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>
+                                    <Run>+/- 14.7</Run>
+                                </Paragraph>
+                            </TableCell>
+                        </TableRow>
+                    </TableRowGroup>
+                    <TableRowGroup>
+                        <TableRow>
+                            <TableCell ColumnSpan="7">
+                                <Table Margin="0">
+                                    <Table.Columns>
+                                        <TableColumn />
+                                        <TableColumn />
+                                    </Table.Columns>
+                                    <TableRowGroup>
+                                        <TableRow>
+                                            <TableCell>
+                                                <Paragraph>
+                                                    <Span>Overall Statistics:</Span>
+                                                    <Span>Samples=</Span>
+                                                    <Span>
+                                                        <Run>56</Run>
+                                                    </Span>
+                                                    <Span>of</Span>
+                                                    <Span>
+                                                        <Run>56</Run>
+                                                    </Span>
+                                                    <Span>
+                                                        <Run>(100%)</Run>
+                                                    </Span>
+                                                </Paragraph>
+                                            </TableCell>
+                                            <TableCell>
+                                                <Paragraph>
+                                                    Overall BP Load: 62% Sys > 140mmHg &amp; 37% Dia > 90mmHg
+                                                </Paragraph>
+                                            </TableCell>
+                                        </TableRow>
+                                    </TableRowGroup>
+                                </Table>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow>
+                            <TableCell></TableCell>
+                            <TableCell>
+                                <Paragraph>Maximum</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>Time</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>Minimum</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>Time</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>Average</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>Std.Dev.</Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow>
+                            <TableCell>
+                                <Paragraph>Systolic (mmHg)</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>
+                                    <Run>166</Run>
+                                </Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>
+                                    <Run>17:20</Run>
+                                </Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>
+                                    <Run>105</Run>
+                                </Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>
+                                    <Run>03:40</Run>
+                                </Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>
+                                    <Run>142</Run>
+                                </Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>
+                                    <Run>+/- 14.7</Run>
+                                </Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow>
+                            <TableCell>
+                                <Paragraph>Diastolic (mmHg)</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>
+                                    <Run>166</Run>
+                                </Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>
+                                    <Run>17:20</Run>
+                                </Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>
+                                    <Run>105</Run>
+                                </Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>
+                                    <Run>03:40</Run>
+                                </Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>
+                                    <Run>142</Run>
+                                </Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>
+                                    <Run>+/- 14.7</Run>
+                                </Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow>
+                            <TableCell>
+                                <Paragraph>MAP (mmHg)</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>
+                                    <Run>166</Run>
+                                </Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>
+                                    <Run>17:20</Run>
+                                </Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>
+                                    <Run>105</Run>
+                                </Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>
+                                    <Run>03:40</Run>
+                                </Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>
+                                    <Run>142</Run>
+                                </Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>
+                                    <Run>+/- 14.7</Run>
+                                </Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow>
+                            <TableRow.Resources>
+                                <Style TargetType="TableCell">
+                                    <Setter Property="BorderBrush" Value="Black" />
+                                    <Setter Property="BorderThickness" Value="0,0,0,1" />
+                                </Style>
+                            </TableRow.Resources>
+                            <TableCell>
+                                <Paragraph>Heart Rate (BPM)</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>
+                                    <Run>166</Run>
+                                </Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>
+                                    <Run>17:20</Run>
+                                </Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>
+                                    <Run>105</Run>
+                                </Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>
+                                    <Run>03:40</Run>
+                                </Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>
+                                    <Run>142</Run>
+                                </Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>
+                                    <Run>+/- 14.7</Run>
+                                </Paragraph>
+                            </TableCell>
+                        </TableRow>
+                    </TableRowGroup>
+                    <TableRowGroup>
+                        <TableRow>
+                            <TableCell ColumnSpan="7">
+                                <Table Margin="0">
+                                    <Table.Columns>
+                                        <TableColumn />
+                                        <TableColumn />
+                                    </Table.Columns>
+                                    <TableRowGroup>
+                                        <TableRow>
+                                            <TableCell>
+                                                <Paragraph>
+                                                    <Span>Overall Statistics:</Span>
+                                                    <Span>Samples=</Span>
+                                                    <Span>
+                                                        <Run>56</Run>
+                                                    </Span>
+                                                    <Span>of</Span>
+                                                    <Span>
+                                                        <Run>56</Run>
+                                                    </Span>
+                                                    <Span>
+                                                        <Run>(100%)</Run>
+                                                    </Span>
+                                                </Paragraph>
+                                            </TableCell>
+                                            <TableCell>
+                                                <Paragraph>
+                                                    Overall BP Load: 62% Sys > 140mmHg &amp; 37% Dia > 90mmHg
+                                                </Paragraph>
+                                            </TableCell>
+                                        </TableRow>
+                                    </TableRowGroup>
+                                </Table>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow>
+                            <TableCell></TableCell>
+                            <TableCell>
+                                <Paragraph>Maximum</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>Time</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>Minimum</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>Time</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>Average</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>Std.Dev.</Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow>
+                            <TableCell>
+                                <Paragraph>Systolic (mmHg)</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>
+                                    <Run>166</Run>
+                                </Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>
+                                    <Run>17:20</Run>
+                                </Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>
+                                    <Run>105</Run>
+                                </Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>
+                                    <Run>03:40</Run>
+                                </Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>
+                                    <Run>142</Run>
+                                </Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>
+                                    <Run>+/- 14.7</Run>
+                                </Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow>
+                            <TableCell>
+                                <Paragraph>Diastolic (mmHg)</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>
+                                    <Run>166</Run>
+                                </Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>
+                                    <Run>17:20</Run>
+                                </Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>
+                                    <Run>105</Run>
+                                </Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>
+                                    <Run>03:40</Run>
+                                </Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>
+                                    <Run>142</Run>
+                                </Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>
+                                    <Run>+/- 14.7</Run>
+                                </Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow>
+                            <TableCell>
+                                <Paragraph>MAP (mmHg)</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>
+                                    <Run>166</Run>
+                                </Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>
+                                    <Run>17:20</Run>
+                                </Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>
+                                    <Run>105</Run>
+                                </Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>
+                                    <Run>03:40</Run>
+                                </Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>
+                                    <Run>142</Run>
+                                </Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>
+                                    <Run>+/- 14.7</Run>
+                                </Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow>
+                            <TableCell>
+                                <Paragraph>Heart Rate (BPM)</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>
+                                    <Run>166</Run>
+                                </Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>
+                                    <Run>17:20</Run>
+                                </Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>
+                                    <Run>105</Run>
+                                </Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>
+                                    <Run>03:40</Run>
+                                </Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>
+                                    <Run>142</Run>
+                                </Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>
+                                    <Run>+/- 14.7</Run>
+                                </Paragraph>
+                            </TableCell>
+                        </TableRow>
+                    </TableRowGroup>
+                </Table>
+            </Section>
+            <Section>
+                <Paragraph>
+                    <Figure>
+                        <BlockUIContainer>
+                            <lvc:CartesianChart Height="200" Series="{Binding Path=PressureSeries}">
+                                <lvc:CartesianChart.AxisX>
+                                    <lvc:Axis LabelFormatter="{Binding Path=XFormatterTime}"/>
+                                </lvc:CartesianChart.AxisX>
+                                <lvc:CartesianChart.AxisY>
+                                    <lvc:Axis Title="mmHg" />
+                                </lvc:CartesianChart.AxisY>
+                            </lvc:CartesianChart>
+                        </BlockUIContainer>
+                    </Figure>
+                </Paragraph>
+            </Section>
+            <Section Background="Gray">
+                <Paragraph>
+                    <Span FontWeight="Bold">Medical Diagnosis:</Span>
+                    <Span>
+                        <Run Text="{Binding Path=ActivePatient.Comments}" />
+                    </Span>
+                </Paragraph>
+            </Section>
+            <Section>
+                <BlockUIContainer>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
+                            <Bold>Analysis With Standard Protocol: </Bold>
+                            <TextBlock>ESH/ESC (World Health Organization)</TextBlock>
+                        </TextBlock>
+                    </Grid>
+                </BlockUIContainer>
+            </Section>
+            <Section>
+                <BlockUIContainer>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
+                            <Bold>Analysis With Standard Protocol: </Bold>
+                            <TextBlock>AHA</TextBlock>
+                        </TextBlock>
+                    </Grid>
+                </BlockUIContainer>
+            </Section>
+            <Section>
+                <BlockUIContainer>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
+                            <Bold>Analysis With Standard Protocol: </Bold>
+                            <TextBlock>JNC8</TextBlock>
+                        </TextBlock>
+                    </Grid>
+                </BlockUIContainer>
+            </Section>
+            <Section>
+                <Paragraph>
+                    <Bold>Histogram</Bold>
+                </Paragraph>
+                <BlockUIContainer>
+                    <StackPanel>
+                        <lvc:CartesianChart Height="150">
+                            
+                        </lvc:CartesianChart>
+                        <lvc:CartesianChart Height="150">
+
+                        </lvc:CartesianChart>
+                        <lvc:CartesianChart Height="150">
+
+                        </lvc:CartesianChart>
+                    </StackPanel>
+                </BlockUIContainer>
+            </Section>
+            <Section>
+                <BlockUIContainer>
+                    <StackPanel>
+                        <UniformGrid Columns="6">
+                            <TextBlock>Date</TextBlock>
+                            <TextBlock>Time</TextBlock>
+                            <TextBlock>Sys</TextBlock>
+                            <TextBlock>Dia</TextBlock>
+                            <TextBlock>HR</TextBlock>
+                            <TextBlock>MABP</TextBlock>
+                        </UniformGrid>
+                        <ItemsControl ItemsSource="{Binding Path=ActivePatient.Readings}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate DataType="local:Reading">
+                                    <UniformGrid Columns="6">
+                                        <TextBlock Text="{Binding Path=Date, StringFormat=d}" />
+                                        <TextBlock Text="{Binding Path=Date, StringFormat=t}" />
+                                        <TextBlock Text="{Binding Path=Sys}" />
+                                        <TextBlock Text="{Binding Path=Dia}" />
+                                        <TextBlock Text="{Binding Path=HR}" />
+                                        <TextBlock Text="{Binding Path=MABP}" />
+                                    </UniformGrid>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </StackPanel>
+                </BlockUIContainer>
+            </Section>
         </FlowDocument>
     </FlowDocumentPageViewer>
 </Page>
