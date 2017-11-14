@@ -1,4 +1,5 @@
-﻿using LiveCharts;
+﻿using HolterECG.Controls;
+using LiveCharts;
 using LiveCharts.Defaults;
 using LiveCharts.Wpf;
 using System;
@@ -74,6 +75,179 @@ namespace HolterECG.DataStructures
             this.Lines.Add(lineSystolic);
             this.Lines.Add(lineDiastolic);
             this.Lines.Add(lineHr);
+
+            PieWho = new SeriesCollection();
+            PieAha = new SeriesCollection();
+            PieJnc8 = new SeriesCollection();
+
+            // WHO
+            this.WhoSlices = new ObservableCollection<Slice>();
+            WhoSlices.Add(new Slice
+            {
+                Title = "Optimal",
+                Accepts = reading => reading.Sys < 120 && reading.Dia < 80,
+                Fill = Brushes.Green,
+                Series = this.PieWho,
+                Legend = new string[] { "<120", "AND", "<80" }
+            });
+            WhoSlices.Add(new Slice
+            {
+                Title = "Normal",
+                Accepts = reading => (reading.Sys >= 120 && reading.Sys < 130) || (reading.Dia >= 80 && reading.Dia < 85),
+                Fill = Brushes.Green,
+                Series = this.PieWho,
+                Legend = new string[] { "120-129", "OR", "80-84" }
+            });
+            WhoSlices.Add(new Slice
+            {
+                Title = "High Normal",
+                Accepts = reading => (reading.Sys >= 130 && reading.Sys < 140) || (reading.Dia >= 85 && reading.Dia < 90),
+                Fill = Brushes.Green,
+                Series = this.PieWho,
+                Legend = new string[] { "130-139", "OR", "85-89" }
+            });
+            WhoSlices.Add(new Slice
+            {
+                Title = "Grade I",
+                Accepts = reading => (reading.Sys >= 140 && reading.Sys < 160) || (reading.Dia >= 90 && reading.Dia < 100),
+                Fill = Brushes.Yellow,
+                Series = this.PieWho,
+                Legend = new string[] { "140-159", "OR", "90-99" }
+            });
+            WhoSlices.Add(new Slice
+            {
+                Title = "Grade II",
+                Accepts = reading => (reading.Sys >= 160 && reading.Sys < 180) || (reading.Dia >= 100 && reading.Dia < 110),
+                Fill = Brushes.Orange,
+                Series = this.PieWho,
+                Legend = new string[] { "160-179", "OR", "100-109" }
+            });
+            WhoSlices.Add(new Slice
+            {
+                Title = "Grade III",
+                Accepts = reading => reading.Sys >= 180 || reading.Dia >= 110,
+                Fill = Brushes.Red,
+                Series = this.PieWho,
+                Legend = new string[] { ">=180", "OR", ">=110" }
+            });
+            WhoSlices.Add(new Slice
+            {
+                Title = "ISH",
+                Accepts = reading => reading.Sys > 140 && reading.Dia < 90,
+                Fill = Brushes.Purple,
+                Series = this.PieWho,
+                Legend = new string[] { ">140", "AND", "<90" }
+            });
+
+            // AHA
+            AhaSlices = new ObservableCollection<Slice>();
+            AhaSlices.Add(new Slice
+            {
+                Title = "Normal",
+                Accepts = reading => reading.Sys < 120 && reading.Dia < 80,
+                Fill = Brushes.Green,
+                Series = this.PieAha,
+                Legend = new string[] { "<120", "AND", "<80" }
+            });
+            AhaSlices.Add(new Slice
+            {
+                Title = "Prehypertesion",
+                Accepts = reading => (reading.Sys >= 120 && reading.Sys < 140) || (reading.Dia >= 80 && reading.Dia < 90),
+                Fill = Brushes.Yellow,
+                Series = this.PieAha,
+                Legend = new string[] { "120-139", "OR", "80-89" }
+            });
+            AhaSlices.Add(new Slice
+            {
+                Title = "Stage 1 Hypertension",
+                Accepts = reading => (reading.Sys >= 140 && reading.Sys < 160) || (reading.Dia >= 90 && reading.Dia < 100),
+                Fill = Brushes.Orange,
+                Series = this.PieAha,
+                Legend = new string[] { "140-159", "OR", "90-99" }
+            });
+            AhaSlices.Add(new Slice
+            {
+                Title = "Stage 2 Hypertension",
+                Accepts = reading => (reading.Sys >= 160 && reading.Sys <= 180) || (reading.Dia >= 100 && reading.Dia <= 110),
+                Fill = Brushes.OrangeRed,
+                Series = this.PieAha,
+                Legend = new string[] { "160-179", "OR", "100-109" }
+            });
+            AhaSlices.Add(new Slice
+            {
+                Title = "Hypertension Crisis",
+                Accepts = reading => reading.Sys > 180 || reading.Dia > 110,
+                Fill = Brushes.Red,
+                Series = this.PieAha,
+                Legend = new string[] { ">180", "OR", ">110" }
+            });
+
+            // JNC8
+            Jnc8Slices = new ObservableCollection<Slice>();
+            Jnc8Slices.Add(new Slice
+            {
+                Title = "Normal",
+                Accepts = reading => (reading.Sys >= 90 && reading.Sys < 120) || (reading.Dia >= 60 && reading.Dia < 80),
+                Fill = Brushes.Green,
+                Series = this.PieJnc8,
+                Legend = new string[] { "90-119", "OR", "60-79" }
+            });
+            Jnc8Slices.Add(new Slice
+            {
+                Title = "Prehypertesion",
+                Accepts = reading => (reading.Sys >= 120 && reading.Sys < 140) || (reading.Dia >= 80 && reading.Dia < 90),
+                Fill = Brushes.Green,
+                Series = this.PieJnc8,
+                Legend = new string[] { "120-139", "OR", "80-89" }
+            });
+            Jnc8Slices.Add(new Slice
+            {
+                Title = "Stage 1 Hypertension",
+                Accepts = reading => (reading.Sys >= 140 && reading.Sys < 160) || (reading.Dia >= 90 && reading.Dia < 100),
+                Fill = Brushes.Yellow,
+                Series = this.PieJnc8,
+                Legend = new string[] { "140-159", "OR", "90-99" }
+            });
+            Jnc8Slices.Add(new Slice
+            {
+                Title = "Stage 2 Hypertension",
+                Accepts = reading => reading.Sys >= 160 || reading.Dia >= 100,
+                Fill = Brushes.Red,
+                Series = this.PieJnc8,
+                Legend = new string[] { ">=160", "OR", ">=100" }
+            });
+            Jnc8Slices.Add(new Slice
+            {
+                Title = "ISH",
+                Accepts = reading => reading.Sys >= 140 && reading.Dia < 90,
+                Fill = Brushes.Purple,
+                Series = this.PieJnc8,
+                Legend = new string[] { ">=140", "AND", "<90" }
+            });
+
+            List<Slice> slices = new List<Slice>();
+            slices.AddRange(WhoSlices);
+            slices.AddRange(AhaSlices);
+            slices.AddRange(Jnc8Slices);
+
+            foreach (var reading in _state.ActivePatient.Readings)
+            {
+                foreach (var slice in slices)
+                    if (slice.Accepts(reading))
+                        slice.Readings.Add(reading);
+            }
+
+            foreach (var slice in slices)
+            {
+                slice.Percentage = slice.Readings.Count / (double)_state.ActivePatient.Readings.Count;
+                slice.Series.Add(new PieSeries
+                {
+                    Title = slice.Title,
+                    Values = new ChartValues<double>(new double[] { slice.Percentage }),
+                    Fill = slice.Fill,
+                    Foreground = Brushes.Black
+                });
+            }
         }
 
         Statistics GetStatistics(IEnumerable<Reading> readings)
@@ -145,5 +319,9 @@ namespace HolterECG.DataStructures
         public SeriesCollection PieJnc8 { get; private set; }
 
         public Func<double, string> XFormatterTime { get { return value => new DateTime((long)value).ToString("t"); } }
+
+        public ObservableCollection<Slice> WhoSlices { get; private set; }
+        public ObservableCollection<Slice> AhaSlices { get; private set; }
+        public ObservableCollection<Slice> Jnc8Slices { get; private set; }
     }
 }

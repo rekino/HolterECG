@@ -12,6 +12,11 @@
         <local:Report />
     </Page.DataContext>
     <Page.Resources>
+        <Style x:Key="header" TargetType="TextBlock">
+            <Setter Property="TextAlignment" Value="Center" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="Margin" Value="5" />
+        </Style>
         <Style TargetType="Section">
             <Setter Property="BorderThickness" Value="1" />
             <Setter Property="BorderBrush" Value="Black" />
@@ -848,6 +853,34 @@
                             <Bold>Analysis With Standard Protocol: </Bold>
                             <TextBlock>ESH/ESC (World Health Organization)</TextBlock>
                         </TextBlock>
+                        <StackPanel VerticalAlignment="Center" Grid.Row="1" Grid.Column="0">
+                            <StackPanel Orientation="Horizontal">
+                                <Canvas Width="10" />
+                                <TextBlock Name="hdrCategory" Style="{StaticResource header}" Width="4cm">Category</TextBlock>
+                                <TextBlock Name="hdrSys" Style="{StaticResource header}" Width="2cm">Sys</TextBlock>
+                                <TextBlock Name="hdrOp" Style="{StaticResource header}" Width="1cm"></TextBlock>
+                                <TextBlock Name="hdrDia" Style="{StaticResource header}" Width="2cm">Dia</TextBlock>
+                                <TextBlock Name="hdrPercentage" Style="{StaticResource header}" Width="2cm">Percentage</TextBlock>
+                            </StackPanel>
+                            <Separator />
+                            <ItemsControl ItemsSource="{Binding Path=WhoSlices}">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate DataType="local:Slice">
+                                        <StackPanel Orientation="Horizontal">
+                                            <Canvas Width="10" VerticalAlignment="Center">
+                                                <Rectangle Width="10" Height="10" Fill="{Binding Path=Fill}" Canvas.Top="-5"/>
+                                            </Canvas>
+                                            <TextBlock Style="{StaticResource header}" TextAlignment="Left" Width="{Binding ElementName=hdrCategory, Path=Width}" Text="{Binding Path=Title}" />
+                                            <TextBlock Style="{StaticResource header}" Width="{Binding ElementName=hdrSys, Path=Width}" Text="{Binding Path=Legend[0]}" />
+                                            <TextBlock Style="{StaticResource header}" Width="{Binding ElementName=hdrOp, Path=Width}" Text="{Binding Path=Legend[1]}" />
+                                            <TextBlock Style="{StaticResource header}" Width="{Binding ElementName=hdrDia, Path=Width}" Text="{Binding Path=Legend[2]}" />
+                                            <TextBlock Style="{StaticResource header}" Width="{Binding ElementName=hdrPercentage, Path=Width}" Text="{Binding Path=Percentage, StringFormat=P}" FontWeight="Bold"/>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </StackPanel>
+                        <lvc:PieChart Height="6cm" DisableAnimations="True" Grid.Row="1" Grid.Column="1" Series="{Binding Path=PieWho}" />
                     </Grid>
                 </BlockUIContainer>
             </Section>
@@ -866,6 +899,34 @@
                             <Bold>Analysis With Standard Protocol: </Bold>
                             <TextBlock>AHA</TextBlock>
                         </TextBlock>
+                        <StackPanel VerticalAlignment="Center" Grid.Row="1" Grid.Column="0">
+                            <StackPanel Orientation="Horizontal">
+                                <Canvas Width="10" />
+                                <TextBlock Style="{StaticResource header}" Width="4cm">Category</TextBlock>
+                                <TextBlock Style="{StaticResource header}" Width="2cm">Sys</TextBlock>
+                                <TextBlock Style="{StaticResource header}" Width="1cm"></TextBlock>
+                                <TextBlock Style="{StaticResource header}" Width="2cm">Dia</TextBlock>
+                                <TextBlock Style="{StaticResource header}" Width="2cm">Percentage</TextBlock>
+                            </StackPanel>
+                            <Separator />
+                            <ItemsControl ItemsSource="{Binding Path=AhaSlices}">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate DataType="local:Slice">
+                                        <StackPanel Orientation="Horizontal">
+                                            <Canvas Width="10" VerticalAlignment="Center">
+                                                <Rectangle Width="10" Height="10" Fill="{Binding Path=Fill}" Canvas.Top="-5"/>
+                                            </Canvas>
+                                            <TextBlock Style="{StaticResource header}" TextAlignment="Left" Width="{Binding ElementName=hdrCategory, Path=Width}" Text="{Binding Path=Title}" />
+                                            <TextBlock Style="{StaticResource header}" Width="{Binding ElementName=hdrSys, Path=Width}" Text="{Binding Path=Legend[0]}" />
+                                            <TextBlock Style="{StaticResource header}" Width="{Binding ElementName=hdrOp, Path=Width}" Text="{Binding Path=Legend[1]}" />
+                                            <TextBlock Style="{StaticResource header}" Width="{Binding ElementName=hdrDia, Path=Width}" Text="{Binding Path=Legend[2]}" />
+                                            <TextBlock Style="{StaticResource header}" Width="{Binding ElementName=hdrPercentage, Path=Width}" Text="{Binding Path=Percentage, StringFormat=P}" FontWeight="Bold"/>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </StackPanel>
+                        <lvc:PieChart Height="6cm" DisableAnimations="True" Grid.Row="1" Grid.Column="1" Series="{Binding Path=PieAha}" />
                     </Grid>
                 </BlockUIContainer>
             </Section>
@@ -884,6 +945,34 @@
                             <Bold>Analysis With Standard Protocol: </Bold>
                             <TextBlock>JNC8</TextBlock>
                         </TextBlock>
+                        <StackPanel VerticalAlignment="Center" Grid.Row="1" Grid.Column="0">
+                            <StackPanel Orientation="Horizontal">
+                                <Canvas Width="10" />
+                                <TextBlock Style="{StaticResource header}" Width="4cm">Category</TextBlock>
+                                <TextBlock Style="{StaticResource header}" Width="2cm">Sys</TextBlock>
+                                <TextBlock Style="{StaticResource header}" Width="1cm"></TextBlock>
+                                <TextBlock Style="{StaticResource header}" Width="2cm">Dia</TextBlock>
+                                <TextBlock Style="{StaticResource header}" Width="2cm">Percentage</TextBlock>
+                            </StackPanel>
+                            <Separator />
+                            <ItemsControl ItemsSource="{Binding Path=Jnc8Slices}">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate DataType="local:Slice">
+                                        <StackPanel Orientation="Horizontal">
+                                            <Canvas Width="10" VerticalAlignment="Center">
+                                                <Rectangle Width="10" Height="10" Fill="{Binding Path=Fill}" Canvas.Top="-5"/>
+                                            </Canvas>
+                                            <TextBlock Style="{StaticResource header}" TextAlignment="Left" Width="{Binding ElementName=hdrCategory, Path=Width}" Text="{Binding Path=Title}" />
+                                            <TextBlock Style="{StaticResource header}" Width="{Binding ElementName=hdrSys, Path=Width}" Text="{Binding Path=Legend[0]}" />
+                                            <TextBlock Style="{StaticResource header}" Width="{Binding ElementName=hdrOp, Path=Width}" Text="{Binding Path=Legend[1]}" />
+                                            <TextBlock Style="{StaticResource header}" Width="{Binding ElementName=hdrDia, Path=Width}" Text="{Binding Path=Legend[2]}" />
+                                            <TextBlock Style="{StaticResource header}" Width="{Binding ElementName=hdrPercentage, Path=Width}" Text="{Binding Path=Percentage, StringFormat=P}" FontWeight="Bold"/>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </StackPanel>
+                        <lvc:PieChart Height="6cm" DisableAnimations="True" Grid.Row="1" Grid.Column="1" Series="{Binding Path=PieJnc8}" />
                     </Grid>
                 </BlockUIContainer>
             </Section>

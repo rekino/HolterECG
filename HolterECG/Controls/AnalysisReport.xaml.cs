@@ -35,6 +35,7 @@ namespace HolterECG.Controls
         }
         public string[] Legend { get; set; }
         public List<Reading> Readings { get; private set; }
+        public double Percentage { get; set; }
     }
     class AnalysisReportModel
     {
