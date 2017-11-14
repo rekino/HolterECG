@@ -815,12 +815,12 @@
             </Section>
             <Section>
                 <BlockUIContainer>
-                    <lvc:CartesianChart Height="200" Series="{Binding Path=PressureSeries}">
+                    <lvc:CartesianChart DisableAnimations="True" Height="200" Series="{Binding Path=Lines}">
                         <lvc:CartesianChart.AxisX>
                             <lvc:Axis LabelFormatter="{Binding Path=XFormatterTime}"/>
                         </lvc:CartesianChart.AxisX>
                         <lvc:CartesianChart.AxisY>
-                            <lvc:Axis Title="mmHg" />
+                            <lvc:Axis Title="mmHg\bpm" />
                         </lvc:CartesianChart.AxisY>
                     </lvc:CartesianChart>
                 </BlockUIContainer>
@@ -828,7 +828,7 @@
             <Section Background="Gainsboro">
                 <Paragraph>
                     <Span FontWeight="Bold">Medical Diagnosis:</Span>
-                    <Span>
+                    <Span FontFamily="Sans Serif">
                         <Run Text="{Binding Path=Patient.Comments}" />
                     </Span>
                 </Paragraph>

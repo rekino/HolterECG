@@ -1,10 +1,14 @@
-﻿using System;
+﻿using LiveCharts;
+using LiveCharts.Defaults;
+using LiveCharts.Wpf;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Media;
 
 namespace HolterECG.DataStructures
 {
@@ -47,11 +51,29 @@ namespace HolterECG.DataStructures
         public Report()
         {
             _state = Application.Current.FindResource("state") as State;
+
             TimeSpan NightStart = new TimeSpan(0, 23, 0, 0);
             TimeSpan NightEnd = new TimeSpan(0, 7, 0, 0);
             Overall = GetStatistics(Patient.Readings);
             Awake = GetStatistics(Patient.Readings.Where(x => (x.Date.TimeOfDay > NightEnd) && (x.Date.TimeOfDay < NightStart)));
             Asleep = GetStatistics(Patient.Readings.Where(x => !((x.Date.TimeOfDay > NightEnd) && (x.Date.TimeOfDay < NightStart))));
+
+            Lines = new SeriesCollection();
+            LineSeries lineSystolic = new LineSeries { Title = "Systolic Blood Pressure", LineSmoothness = 0, Fill = Brushes.Transparent };
+            lineSystolic.Values = new ChartValues<DateTimePoint>();
+            LineSeries lineDiastolic = new LineSeries { Title = "Diastolic Blood Pressure", LineSmoothness = 0, Fill = Brushes.Transparent };
+            lineDiastolic.Values = new ChartValues<DateTimePoint>();
+            LineSeries lineHr = new LineSeries { Title = "Heart Rate", LineSmoothness = 0, Fill = Brushes.Transparent };
+            lineHr.Values = new ChartValues<DateTimePoint>();
+            foreach (var reading in Patient.Readings)
+            {
+                lineSystolic.Values.Add(new DateTimePoint(reading.Date, reading.Sys));
+                lineDiastolic.Values.Add(new DateTimePoint(reading.Date, reading.Dia));
+                lineHr.Values.Add(new DateTimePoint(reading.Date, reading.HR));
+            }
+            this.Lines.Add(lineSystolic);
+            this.Lines.Add(lineDiastolic);
+            this.Lines.Add(lineHr);
         }
 
         Statistics GetStatistics(IEnumerable<Reading> readings)
@@ -112,6 +134,16 @@ namespace HolterECG.DataStructures
         public Statistics Awake { get; private set; }
         public Statistics Asleep { get; private set; }
         public Patient Patient { get { return _state.ActivePatient; } }
-        
+        public SeriesCollection Lines { get; private set; }
+
+        public SeriesCollection BarSystolic { get; private set; }
+        public SeriesCollection BarDiastolic { get; private set; }
+        public SeriesCollection BarHeartRate { get; private set; }
+
+        public SeriesCollection PieWho { get; private set; }
+        public SeriesCollection PieAha { get; private set; }
+        public SeriesCollection PieJnc8 { get; private set; }
+
+        public Func<double, string> XFormatterTime { get { return value => new DateTime((long)value).ToString("t"); } }
     }
 }
