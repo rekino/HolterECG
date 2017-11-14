@@ -46,7 +46,7 @@ namespace HolterECG.DataStructures
             get { return (double)Count / Length; }
         }
     }
-    class Report
+    class Report : System.ComponentModel.INotifyPropertyChanged
     {
         State _state;
         public Report()
@@ -248,6 +248,27 @@ namespace HolterECG.DataStructures
                     Foreground = Brushes.Black
                 });
             }
+
+            BarSystolic = new SeriesCollection();
+            BarDiastolic = new SeriesCollection();
+            BarHeartRate = new SeriesCollection();
+            var bucketSize = 10;
+            double[] syss = _state.ActivePatient.GetSystolicReadings();
+            double[] dias = _state.ActivePatient.GetDiastolicReadings();
+            double[] hrs = _state.ActivePatient.GetHeartRateReadings();
+            List<string> xlabels = new List<string>();
+            int xStart = 50;
+            while (xStart <= 210)
+            {
+                xlabels.Add(xStart.ToString());
+                xStart += bucketSize;
+            }
+            this.XLabels = xlabels.ToArray();
+
+            var totalBuckets = 17;
+            BarSystolic.Add(CreateHistogram(syss, totalBuckets, "Systolic Blood Pressure", Brushes.Blue));
+            BarDiastolic.Add(CreateHistogram(dias, totalBuckets, "Diastolic Blood Pressure", Brushes.Blue));
+            BarHeartRate.Add(CreateHistogram(hrs, totalBuckets, "Heart Rate", Brushes.Blue));
         }
 
         Statistics GetStatistics(IEnumerable<Reading> readings)
@@ -304,6 +325,43 @@ namespace HolterECG.DataStructures
             return result;
         }
 
+        ColumnSeries CreateHistogram(IEnumerable<double> data, int totalBuckets, string title, Brush fill)
+        {
+            var min = 45;
+            var max = 215;
+            var buckets = new double[totalBuckets];
+            var unit = 1.0 / data.Count();
+
+            var bucketSize = (max - min) / totalBuckets;
+
+            foreach (var value in data)
+            {
+                int bucketIndex = 0;
+                if (bucketSize > 0.0)
+                {
+                    bucketIndex = (int)((value - min) / bucketSize);
+                    if (bucketIndex == totalBuckets)
+                    {
+                        bucketIndex--;
+                    }
+                }
+                buckets[bucketIndex] += unit;
+            }
+
+
+            ColumnSeries series = new ColumnSeries
+            {
+                Title = title,
+                Fill = fill,
+                DataLabels = true,
+                LabelPoint = point => point.Y != 0 ? String.Format("{0:P}", point.Y) : "",
+                MaxColumnWidth = double.PositiveInfinity,
+                ColumnPadding = 1
+            };
+            series.Values = new ChartValues<double>(buckets);
+            return series;
+        }
+
         public Statistics Overall { get; private set; }
         public Statistics Awake { get; private set; }
         public Statistics Asleep { get; private set; }
@@ -323,5 +381,87 @@ namespace HolterECG.DataStructures
         public ObservableCollection<Slice> WhoSlices { get; private set; }
         public ObservableCollection<Slice> AhaSlices { get; private set; }
         public ObservableCollection<Slice> Jnc8Slices { get; private set; }
+
+        public Func<double, string> YFormatter { get { return value => String.Format("{0:P}", value); } }
+        public string[] XLabels { get; private set; }
+
+        private bool _includeStatistics;
+
+        public bool IncludeStatistics
+        {
+            get { return _includeStatistics; }
+            set { _includeStatistics = value; OnPropertyChanged("IncludeStatistics"); }
+        }
+        private bool _includeLines;
+
+        public bool IncludeLines
+        {
+            get { return _includeLines; }
+            set { _includeLines = value; OnPropertyChanged("IncludeLines"); }
+        }
+        private bool _includeDiagnosis;
+
+        public bool IncludeDiagnosis
+        {
+            get { return _includeDiagnosis; }
+            set { _includeDiagnosis = value; OnPropertyChanged("IncludeDiagnosis"); }
+        }
+        private bool _includeAnalysisWho;
+
+        public bool IncludeAnalysisWho
+        {
+            get { return _includeAnalysisWho; }
+            set { _includeAnalysisWho = value; OnPropertyChanged("IncludeAnalysisWho"); }
+        }
+        private bool _includeAnalysisAha;
+
+        public bool IncludeAnalysisAha
+        {
+            get { return _includeAnalysisAha; }
+            set { _includeAnalysisAha = value; OnPropertyChanged("IncludeAnalysisAha"); }
+        }
+        private bool _includeAnalysisJnc8;
+
+        public bool IncludeAnalysisJnc8
+        {
+            get { return _includeAnalysisJnc8; }
+            set { _includeAnalysisJnc8 = value; OnPropertyChanged("IncludeAnalysisJnc8"); }
+        }
+        private bool _includeHistogramSys;
+
+        public bool IncludeHistogramSys
+        {
+            get { return _includeHistogramSys; }
+            set { _includeHistogramSys = value; OnPropertyChanged("IncludeHistogramSys"); }
+        }
+        private bool _includeHistogramDia;
+
+        public bool IncludeHistogramDia
+        {
+            get { return _includeHistogramDia; }
+            set { _includeHistogramDia = value; OnPropertyChanged("IncludeHistogramDia"); }
+        }
+        private bool _includeHistogramHr;
+
+        public bool IncludeHistogramHr
+        {
+            get { return _includeHistogramHr; }
+            set { _includeHistogramHr = value; OnPropertyChanged("IncludeHistogramHr"); }
+        }
+        private bool _includeReadings;
+
+        public bool IncludeReadings
+        {
+            get { return _includeReadings; }
+            set { _includeReadings = value; OnPropertyChanged("IncludeReadings"); }
+        }
+
+
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        protected virtual void OnPropertyChanged(string propertyName = null)
+        {
+            if (PropertyChanged != null)
+                PropertyChanged.Invoke(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+        }
     }
 }

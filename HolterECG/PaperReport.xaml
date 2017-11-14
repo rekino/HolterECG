@@ -982,14 +982,41 @@
                 </Paragraph>
                 <BlockUIContainer>
                     <StackPanel>
-                        <lvc:CartesianChart Height="150">
-                            
+                        <lvc:CartesianChart Style="{StaticResource chart}" Series="{Binding Path=BarSystolic}" Height="5cm">
+                            <lvc:CartesianChart.AxisX>
+                                <lvc:Axis Style="{StaticResource axis}" Title="Systolic Blood Pressure (mmHg)" Labels="{Binding Path=XLabels}">
+                                    <lvc:Axis.Separator>
+                                        <lvc:Separator Step="1" />
+                                    </lvc:Axis.Separator>
+                                </lvc:Axis>
+                            </lvc:CartesianChart.AxisX>
+                            <lvc:CartesianChart.AxisY>
+                                <lvc:Axis Style="{StaticResource axis}" LabelFormatter="{Binding Path=YFormatter}"/>
+                            </lvc:CartesianChart.AxisY>
                         </lvc:CartesianChart>
-                        <lvc:CartesianChart Height="150">
-
+                        <lvc:CartesianChart Style="{StaticResource chart}" Grid.Row="1" Series="{Binding Path=BarDiastolic}" Height="5cm">
+                            <lvc:CartesianChart.AxisX>
+                                <lvc:Axis Style="{StaticResource axis}" Title="Diastolic Blood Pressure (mmHg)" Labels="{Binding Path=XLabels}">
+                                    <lvc:Axis.Separator>
+                                        <lvc:Separator Step="1" />
+                                    </lvc:Axis.Separator>
+                                </lvc:Axis>
+                            </lvc:CartesianChart.AxisX>
+                            <lvc:CartesianChart.AxisY>
+                                <lvc:Axis Style="{StaticResource axis}" LabelFormatter="{Binding Path=YFormatter}"></lvc:Axis>
+                            </lvc:CartesianChart.AxisY>
                         </lvc:CartesianChart>
-                        <lvc:CartesianChart Height="150">
-
+                        <lvc:CartesianChart Style="{StaticResource chart}" Grid.Row="2" Series="{Binding Path=BarHeartRate}" Height="5cm">
+                            <lvc:CartesianChart.AxisX>
+                                <lvc:Axis Style="{StaticResource axis}" Title="Heart Rate (bpm)" Labels="{Binding Path=XLabels}">
+                                    <lvc:Axis.Separator>
+                                        <lvc:Separator Step="1" />
+                                    </lvc:Axis.Separator>
+                                </lvc:Axis>
+                            </lvc:CartesianChart.AxisX>
+                            <lvc:CartesianChart.AxisY>
+                                <lvc:Axis Style="{StaticResource axis}" LabelFormatter="{Binding Path=YFormatter}"></lvc:Axis>
+                            </lvc:CartesianChart.AxisY>
                         </lvc:CartesianChart>
                     </StackPanel>
                 </BlockUIContainer>
