@@ -9,7 +9,7 @@
       d:DesignHeight="1000" d:DesignWidth="900"
 	Title="Paper Report">
     <Page.DataContext>
-        <Binding Source="{StaticResource state}" />
+        <local:Report />
     </Page.DataContext>
     <Page.Resources>
         <Style TargetType="Section">
@@ -21,79 +21,168 @@
         <Style x:Key="label" TargetType="Span">
             <Setter Property="FontStyle" Value="Italic" />
         </Style>
+        <Style x:Key="value-container" TargetType="Span">
+            <Setter Property="FontFamily" Value="Sans Serif" />
+            <Setter Property="TextDecorations">
+                <Setter.Value>
+                    <TextDecorationCollection>
+                        <TextDecoration>
+                            <TextDecoration.Pen>
+                                <Pen Thickness="1" Brush="Black">
+                                    <Pen.DashStyle>
+                                        <DashStyle Dashes="2,2,0,2" />
+                                    </Pen.DashStyle>
+                                </Pen>
+                            </TextDecoration.Pen>
+                        </TextDecoration>
+                    </TextDecorationCollection>
+                </Setter.Value>
+            </Setter>
+        </Style>
         <Style x:Key="value" TargetType="Run">
             <Setter Property="Foreground" Value="Black" />
         </Style>
     </Page.Resources>
     <FlowDocumentPageViewer>
-        <FlowDocument ColumnWidth="800" FontSize="14" FontFamily="Georgia">
-            <Section Background="Gray">
-                <Paragraph>
-                    <Span Style="{StaticResource label}">Patient Name:</Span>
-                    <Span>
-                        <Run Style="{StaticResource value}" Text="{Binding Path=ActivePatient.FirstName}" />
-                        <Run Style="{StaticResource value}" Text="{Binding Path=ActivePatient.LastName}" />
-                    </Span>
-                    <Span Style="{StaticResource label}">Phone Number:</Span>
-                    <Span>
-                        <Run Style="{StaticResource value}" Text="{Binding Path=ActivePatient.PhoneNumber}" />
-                    </Span>
-                    <Span Style="{StaticResource label}">Age:</Span>
-                    <Span>
-                        <Run Style="{StaticResource value}" Text="{Binding Path=ActivePatient.Age}" />
-                    </Span>
-                    <Span Style="{StaticResource label}">Sex:</Span>
-                    <Span>
-                        <Run Style="{StaticResource value}" Text="{Binding Path=ActivePatient.Sex}" />
-                    </Span>
-                    <Span Style="{StaticResource label}">Height:</Span>
-                    <Span>
-                        <Run Style="{StaticResource value}" Text="{Binding Path=ActivePatient.Height}" />
-                    </Span>
-                    <Span Style="{StaticResource label}">Weight:</Span>
-                    <Span>
-                        <Run Style="{StaticResource value}" Text="{Binding Path=ActivePatient.Weight}" />
-                    </Span>
-                    <Span Style="{StaticResource label}">Physician:</Span>
-                    <Span>
-                        <Run Style="{StaticResource value}" Text="{Binding Path=ActivePatient.Physician}" />
-                    </Span>
-                    <Span Style="{StaticResource label}">Insurance:</Span>
-                    <Span>
-                        <Run Style="{StaticResource value}" Text="{Binding Path=ActivePatient.Insurance}" />
-                    </Span>
-                </Paragraph>
+        <FlowDocument ColumnWidth="21cm" FontSize="14" FontFamily="Georgia" Background="White">
+            <Section Background="Gainsboro">
+                <Table>
+                    <Table.Columns>
+                        <TableColumn />
+                        <TableColumn />
+                        <TableColumn />
+                        <TableColumn />
+                        <TableColumn />
+                    </Table.Columns>
+                    <TableRowGroup>
+                        <TableRow>
+                            <TableCell ColumnSpan="2">
+                                <Paragraph>
+                                    <Span Style="{StaticResource label}">Patient Name:</Span>
+                                    <Span Style="{StaticResource value-container}">
+                                        <Run Style="{StaticResource value}" Text="{Binding Path=Patient.FirstName}" />
+                                        <Run Style="{StaticResource value}" Text="{Binding Path=Patient.LastName}" />
+                                    </Span>
+                                </Paragraph>
+                            </TableCell>
+                            <TableCell ColumnSpan="2">
+                                <Paragraph>
+                                    <Span Style="{StaticResource label}">Phone Number:</Span>
+                                    <Span Style="{StaticResource value-container}">
+                                        <Run Style="{StaticResource value}" Text="{Binding Path=Patient.PhoneNumber}" />
+                                    </Span>
+                                </Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>
+                                    <Span Style="{StaticResource label}">Age:</Span>
+                                    <Span Style="{StaticResource value-container}">
+                                        <Run Style="{StaticResource value}" Text="{Binding Path=Patient.Age}" />
+                                    </Span>
+                                </Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow>
+                            <TableCell>
+                                <Paragraph>
+                                    <Span Style="{StaticResource label}">Sex:</Span>
+                                    <Span Style="{StaticResource value-container}">
+                                        <Run Style="{StaticResource value}" Text="{Binding Path=Patient.Sex}" />
+                                    </Span>
+                                </Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>
+                                    <Span Style="{StaticResource label}">Height:</Span>
+                                    <Span Style="{StaticResource value-container}">
+                                        <Run Style="{StaticResource value}" Text="{Binding Path=Patient.Height}" />
+                                    </Span>
+                                </Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>
+                                    <Span Style="{StaticResource label}">Weight:</Span>
+                                    <Span Style="{StaticResource value-container}">
+                                        <Run Style="{StaticResource value}" Text="{Binding Path=Patient.Weight}" />
+                                    </Span>
+                                </Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>
+                                    <Span Style="{StaticResource label}">Physician:</Span>
+                                    <Span Style="{StaticResource value-container}">
+                                        <Run Style="{StaticResource value}" Text="{Binding Path=Patient.Physician}" />
+                                    </Span>
+                                </Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>
+                                    <Span Style="{StaticResource label}">Insurance:</Span>
+                                    <Span Style="{StaticResource value-container}">
+                                        <Run Style="{StaticResource value}" Text="{Binding Path=Patient.Insurance}" />
+                                    </Span>
+                                </Paragraph>
+                            </TableCell>
+                        </TableRow>
+                    </TableRowGroup>
+                </Table>
                 <Paragraph>
                     <Span Style="{StaticResource label}">Medical History:</Span>
-                    <Span>
-                        <Run Style="{StaticResource value}" Text="{Binding Path=ActivePatient.MoreInformation}" />
+                    <Span FontFamily="Sans Serif">
+                        <Run Style="{StaticResource value}" Text="{Binding Path=Patient.MoreInformation}" />
                     </Span>
                 </Paragraph>
                 <Paragraph>
                     <Span Style="{StaticResource label}">Medications:</Span>
-                    <Span>
-                        <Run Style="{StaticResource value}" Text="{Binding Path=ActivePatient.Medications}" />
+                    <Span FontFamily="Sans Serif">
+                        <Run Style="{StaticResource value}" Text="{Binding Path=Patient.Medications}" />
                     </Span>
                 </Paragraph>
-                <Paragraph>
-                    <Span Style="{StaticResource label}">Test Start:</Span>
-                    <Span>
-                        <Run Style="{StaticResource value}" Text="1396/07/23 - 16:00" />
-                    </Span>
-                    <Span Style="{StaticResource label}">Test Stop:</Span>
-                    <Span>
-                        <Run Style="{StaticResource value}" Text="1396/07/24 - 16:00" />
-                    </Span>
-                    <Span Style="{StaticResource label}">Number of Samples:</Span>
-                    <Span>
-                        <Run Style="{StaticResource value}" Text="{Binding Path=ActivePatient.Readings.Count, Mode=OneTime}" />
-                    </Span>
-                </Paragraph>
+                <Table>
+                    <Table.Columns>
+                        <TableColumn />
+                        <TableColumn />
+                        <TableColumn />
+                    </Table.Columns>
+                    <TableRowGroup>
+                        <TableRow>
+                            <TableCell>
+                                <Paragraph>
+                                    <Span Style="{StaticResource label}">Test Start:</Span>
+                                    <Span Style="{StaticResource value-container}">
+                                        <Run Style="{StaticResource value}" Text="1396/07/23 - 16:00" />
+                                    </Span>
+                                </Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>
+                                    <Span Style="{StaticResource label}">Test Stop:</Span>
+                                    <Span Style="{StaticResource value-container}">
+                                        <Run Style="{StaticResource value}" Text="1396/07/24 - 16:00" />
+                                    </Span>
+                                </Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>
+                                    <Span Style="{StaticResource label}">Number of Samples:</Span>
+                                    <Span Style="{StaticResource value-container}">
+                                        <Run Style="{StaticResource value}" Text="{Binding Path=Patient.Readings.Count, Mode=OneTime}" />
+                                    </Span>
+                                </Paragraph>
+                            </TableCell>
+                        </TableRow>
+                    </TableRowGroup>
+                </Table>
             </Section>
             <Section>
                 <Table CellSpacing="0">
+                    <Table.Resources>
+                        <Style TargetType="TableCell">
+                            <Setter Property="Padding" Value="3" />
+                        </Style>
+                    </Table.Resources>
                     <Table.Columns>
-                        <TableColumn />
+                        <TableColumn Width="5cm" />
                         <TableColumn />
                         <TableColumn />
                         <TableColumn />
@@ -116,14 +205,14 @@
                                                     <Span>Overall Statistics:</Span>
                                                     <Span>Samples=</Span>
                                                     <Span>
-                                                        <Run>56</Run>
+                                                        <Run Text="{Binding Path=Overall.Count}" />
                                                     </Span>
                                                     <Span>of</Span>
                                                     <Span>
-                                                        <Run>56</Run>
+                                                        <Run Text="{Binding Path=Overall.Length}" />
                                                     </Span>
                                                     <Span>
-                                                        <Run>(100%)</Run>
+                                                        (<Run Text="{Binding Path=Overall.Fraction, StringFormat=P, Mode=OneTime}" />)
                                                     </Span>
                                                 </Paragraph>
                                             </TableCell>
@@ -164,32 +253,32 @@
                             </TableCell>
                             <TableCell>
                                 <Paragraph>
-                                    <Run>166</Run>
+                                    <Run Text="{Binding Path=Overall.SysMax, StringFormat=n2}" />
                                 </Paragraph>
                             </TableCell>
                             <TableCell>
                                 <Paragraph>
-                                    <Run>17:20</Run>
+                                    <Run Text="{Binding Path=Overall.SysMaxTime, StringFormat=t}" />
                                 </Paragraph>
                             </TableCell>
                             <TableCell>
                                 <Paragraph>
-                                    <Run>105</Run>
+                                    <Run Text="{Binding Path=Overall.SysMin, StringFormat=n2}" />
                                 </Paragraph>
                             </TableCell>
                             <TableCell>
                                 <Paragraph>
-                                    <Run>03:40</Run>
+                                    <Run Text="{Binding Path=Overall.SysMinTime, StringFormat=t}" />
                                 </Paragraph>
                             </TableCell>
                             <TableCell>
                                 <Paragraph>
-                                    <Run>142</Run>
+                                    <Run Text="{Binding Path=Overall.SysAvg, StringFormat=n2}" />
                                 </Paragraph>
                             </TableCell>
                             <TableCell>
                                 <Paragraph>
-                                    <Run>+/- 14.7</Run>
+                                    +/- <Run Text="{Binding Path=Overall.SysStd, StringFormat=n2}" />
                                 </Paragraph>
                             </TableCell>
                         </TableRow>
@@ -199,32 +288,33 @@
                             </TableCell>
                             <TableCell>
                                 <Paragraph>
-                                    <Run>166</Run>
+                                    <Run Text="{Binding Path=Overall.DiaMax, StringFormat=n2}" />
                                 </Paragraph>
                             </TableCell>
                             <TableCell>
                                 <Paragraph>
-                                    <Run>17:20</Run>
+                                    <Run Text="{Binding Path=Overall.DiaMaxTime, StringFormat=t}" />
                                 </Paragraph>
                             </TableCell>
                             <TableCell>
                                 <Paragraph>
-                                    <Run>105</Run>
+                                    <Run Text="{Binding Path=Overall.DiaMin, StringFormat=n2}" />
                                 </Paragraph>
                             </TableCell>
                             <TableCell>
                                 <Paragraph>
-                                    <Run>03:40</Run>
+                                    <Run Text="{Binding Path=Overall.DiaMinTime, StringFormat=t}" />
                                 </Paragraph>
                             </TableCell>
                             <TableCell>
                                 <Paragraph>
-                                    <Run>142</Run>
+                                    <Run Text="{Binding Path=Overall.DiaAvg, StringFormat=n2}" />
                                 </Paragraph>
                             </TableCell>
                             <TableCell>
                                 <Paragraph>
-                                    <Run>+/- 14.7</Run>
+                                    +/-
+                                    <Run Text="{Binding Path=Overall.DiaStd, StringFormat=n2}" />
                                 </Paragraph>
                             </TableCell>
                         </TableRow>
@@ -234,32 +324,33 @@
                             </TableCell>
                             <TableCell>
                                 <Paragraph>
-                                    <Run>166</Run>
+                                    <Run Text="{Binding Path=Overall.MapMax, StringFormat=n2}" />
                                 </Paragraph>
                             </TableCell>
                             <TableCell>
                                 <Paragraph>
-                                    <Run>17:20</Run>
+                                    <Run Text="{Binding Path=Overall.MapMaxTime, StringFormat=t}" />
                                 </Paragraph>
                             </TableCell>
                             <TableCell>
                                 <Paragraph>
-                                    <Run>105</Run>
+                                    <Run Text="{Binding Path=Overall.MapMin, StringFormat=n2}" />
                                 </Paragraph>
                             </TableCell>
                             <TableCell>
                                 <Paragraph>
-                                    <Run>03:40</Run>
+                                    <Run Text="{Binding Path=Overall.MapMinTime, StringFormat=t}" />
                                 </Paragraph>
                             </TableCell>
                             <TableCell>
                                 <Paragraph>
-                                    <Run>142</Run>
+                                    <Run Text="{Binding Path=Overall.MapAvg, StringFormat=n2}" />
                                 </Paragraph>
                             </TableCell>
                             <TableCell>
                                 <Paragraph>
-                                    <Run>+/- 14.7</Run>
+                                    +/-
+                                    <Run Text="{Binding Path=Overall.MapStd, StringFormat=n2}" />
                                 </Paragraph>
                             </TableCell>
                         </TableRow>
@@ -268,6 +359,7 @@
                                 <Style TargetType="TableCell">
                                     <Setter Property="BorderBrush" Value="Black" />
                                     <Setter Property="BorderThickness" Value="0,0,0,1" />
+                                    <Setter Property="Padding" Value="3" />
                                 </Style>
                             </TableRow.Resources>
                             <TableCell>
@@ -275,32 +367,33 @@
                             </TableCell>
                             <TableCell>
                                 <Paragraph>
-                                    <Run>166</Run>
+                                    <Run Text="{Binding Path=Overall.HrMax, StringFormat=n2}" />
                                 </Paragraph>
                             </TableCell>
                             <TableCell>
                                 <Paragraph>
-                                    <Run>17:20</Run>
+                                    <Run Text="{Binding Path=Overall.HrMaxTime, StringFormat=t}" />
                                 </Paragraph>
                             </TableCell>
                             <TableCell>
                                 <Paragraph>
-                                    <Run>105</Run>
+                                    <Run Text="{Binding Path=Overall.HrMin, StringFormat=n2}" />
                                 </Paragraph>
                             </TableCell>
                             <TableCell>
                                 <Paragraph>
-                                    <Run>03:40</Run>
+                                    <Run Text="{Binding Path=Overall.HrMinTime, StringFormat=t}" />
                                 </Paragraph>
                             </TableCell>
                             <TableCell>
                                 <Paragraph>
-                                    <Run>142</Run>
+                                    <Run Text="{Binding Path=Overall.HrAvg, StringFormat=n2}" />
                                 </Paragraph>
                             </TableCell>
                             <TableCell>
                                 <Paragraph>
-                                    <Run>+/- 14.7</Run>
+                                    +/-
+                                    <Run Text="{Binding Path=Overall.HrStd, StringFormat=n2}" />
                                 </Paragraph>
                             </TableCell>
                         </TableRow>
@@ -317,23 +410,24 @@
                                         <TableRow>
                                             <TableCell>
                                                 <Paragraph>
-                                                    <Span>Overall Statistics:</Span>
+                                                    <Span>Awake Statistics:</Span>
                                                     <Span>Samples=</Span>
                                                     <Span>
-                                                        <Run>56</Run>
+                                                        <Run Text="{Binding Path=Awake.Count}" />
                                                     </Span>
                                                     <Span>of</Span>
                                                     <Span>
-                                                        <Run>56</Run>
+                                                        <Run Text="{Binding Path=Awake.Length}" />
                                                     </Span>
                                                     <Span>
-                                                        <Run>(100%)</Run>
+                                                        (
+                                                        <Run Text="{Binding Path=Awake.Fraction, StringFormat=P, Mode=OneTime}" /> )
                                                     </Span>
                                                 </Paragraph>
                                             </TableCell>
                                             <TableCell>
                                                 <Paragraph>
-                                                    Overall BP Load: 62% Sys > 140mmHg &amp; 37% Dia > 90mmHg
+                                                    Awake BP Load: 62% Sys > 140mmHg &amp; 37% Dia > 90mmHg
                                                 </Paragraph>
                                             </TableCell>
                                         </TableRow>
@@ -368,32 +462,33 @@
                             </TableCell>
                             <TableCell>
                                 <Paragraph>
-                                    <Run>166</Run>
+                                    <Run Text="{Binding Path=Awake.SysMax, StringFormat=n2}" />
                                 </Paragraph>
                             </TableCell>
                             <TableCell>
                                 <Paragraph>
-                                    <Run>17:20</Run>
+                                    <Run Text="{Binding Path=Awake.SysMaxTime, StringFormat=t}" />
                                 </Paragraph>
                             </TableCell>
                             <TableCell>
                                 <Paragraph>
-                                    <Run>105</Run>
+                                    <Run Text="{Binding Path=Awake.SysMin, StringFormat=n2}" />
                                 </Paragraph>
                             </TableCell>
                             <TableCell>
                                 <Paragraph>
-                                    <Run>03:40</Run>
+                                    <Run Text="{Binding Path=Awake.SysMinTime, StringFormat=t}" />
                                 </Paragraph>
                             </TableCell>
                             <TableCell>
                                 <Paragraph>
-                                    <Run>142</Run>
+                                    <Run Text="{Binding Path=Awake.SysAvg, StringFormat=n2}" />
                                 </Paragraph>
                             </TableCell>
                             <TableCell>
                                 <Paragraph>
-                                    <Run>+/- 14.7</Run>
+                                    +/-
+                                    <Run Text="{Binding Path=Awake.SysStd, StringFormat=n2}" />
                                 </Paragraph>
                             </TableCell>
                         </TableRow>
@@ -403,32 +498,33 @@
                             </TableCell>
                             <TableCell>
                                 <Paragraph>
-                                    <Run>166</Run>
+                                    <Run Text="{Binding Path=Awake.DiaMax, StringFormat=n2}" />
                                 </Paragraph>
                             </TableCell>
                             <TableCell>
                                 <Paragraph>
-                                    <Run>17:20</Run>
+                                    <Run Text="{Binding Path=Awake.DiaMaxTime, StringFormat=t}" />
                                 </Paragraph>
                             </TableCell>
                             <TableCell>
                                 <Paragraph>
-                                    <Run>105</Run>
+                                    <Run Text="{Binding Path=Awake.DiaMin, StringFormat=n2}" />
                                 </Paragraph>
                             </TableCell>
                             <TableCell>
                                 <Paragraph>
-                                    <Run>03:40</Run>
+                                    <Run Text="{Binding Path=Awake.DiaMinTime, StringFormat=t}" />
                                 </Paragraph>
                             </TableCell>
                             <TableCell>
                                 <Paragraph>
-                                    <Run>142</Run>
+                                    <Run Text="{Binding Path=Awake.DiaAvg, StringFormat=n2}" />
                                 </Paragraph>
                             </TableCell>
                             <TableCell>
                                 <Paragraph>
-                                    <Run>+/- 14.7</Run>
+                                    +/-
+                                    <Run Text="{Binding Path=Awake.DiaStd, StringFormat=n2}" />
                                 </Paragraph>
                             </TableCell>
                         </TableRow>
@@ -438,32 +534,33 @@
                             </TableCell>
                             <TableCell>
                                 <Paragraph>
-                                    <Run>166</Run>
+                                    <Run Text="{Binding Path=Awake.MapMax, StringFormat=n2}" />
                                 </Paragraph>
                             </TableCell>
                             <TableCell>
                                 <Paragraph>
-                                    <Run>17:20</Run>
+                                    <Run Text="{Binding Path=Awake.MapMaxTime, StringFormat=t}" />
                                 </Paragraph>
                             </TableCell>
                             <TableCell>
                                 <Paragraph>
-                                    <Run>105</Run>
+                                    <Run Text="{Binding Path=Awake.MapMin, StringFormat=n2}" />
                                 </Paragraph>
                             </TableCell>
                             <TableCell>
                                 <Paragraph>
-                                    <Run>03:40</Run>
+                                    <Run Text="{Binding Path=Awake.MapMinTime, StringFormat=t}" />
                                 </Paragraph>
                             </TableCell>
                             <TableCell>
                                 <Paragraph>
-                                    <Run>142</Run>
+                                    <Run Text="{Binding Path=Awake.MapAvg, StringFormat=n2}" />
                                 </Paragraph>
                             </TableCell>
                             <TableCell>
                                 <Paragraph>
-                                    <Run>+/- 14.7</Run>
+                                    +/-
+                                    <Run Text="{Binding Path=Awake.MapStd, StringFormat=n2}" />
                                 </Paragraph>
                             </TableCell>
                         </TableRow>
@@ -472,6 +569,7 @@
                                 <Style TargetType="TableCell">
                                     <Setter Property="BorderBrush" Value="Black" />
                                     <Setter Property="BorderThickness" Value="0,0,0,1" />
+                                    <Setter Property="Padding" Value="3" />
                                 </Style>
                             </TableRow.Resources>
                             <TableCell>
@@ -479,32 +577,33 @@
                             </TableCell>
                             <TableCell>
                                 <Paragraph>
-                                    <Run>166</Run>
+                                    <Run Text="{Binding Path=Awake.HrMax, StringFormat=n2}" />
                                 </Paragraph>
                             </TableCell>
                             <TableCell>
                                 <Paragraph>
-                                    <Run>17:20</Run>
+                                    <Run Text="{Binding Path=Awake.HrMaxTime, StringFormat=t}" />
                                 </Paragraph>
                             </TableCell>
                             <TableCell>
                                 <Paragraph>
-                                    <Run>105</Run>
+                                    <Run Text="{Binding Path=Awake.HrMin, StringFormat=n2}" />
                                 </Paragraph>
                             </TableCell>
                             <TableCell>
                                 <Paragraph>
-                                    <Run>03:40</Run>
+                                    <Run Text="{Binding Path=Awake.HrMinTime, StringFormat=t}" />
                                 </Paragraph>
                             </TableCell>
                             <TableCell>
                                 <Paragraph>
-                                    <Run>142</Run>
+                                    <Run Text="{Binding Path=Awake.HrAvg, StringFormat=n2}" />
                                 </Paragraph>
                             </TableCell>
                             <TableCell>
                                 <Paragraph>
-                                    <Run>+/- 14.7</Run>
+                                    +/-
+                                    <Run Text="{Binding Path=Awake.HrStd, StringFormat=n2}" />
                                 </Paragraph>
                             </TableCell>
                         </TableRow>
@@ -521,23 +620,24 @@
                                         <TableRow>
                                             <TableCell>
                                                 <Paragraph>
-                                                    <Span>Overall Statistics:</Span>
+                                                    <Span>Asleep Statistics:</Span>
                                                     <Span>Samples=</Span>
                                                     <Span>
-                                                        <Run>56</Run>
+                                                        <Run Text="{Binding Path=Asleep.Count}" />
                                                     </Span>
                                                     <Span>of</Span>
                                                     <Span>
-                                                        <Run>56</Run>
+                                                        <Run Text="{Binding Path=Asleep.Length}" />
                                                     </Span>
                                                     <Span>
-                                                        <Run>(100%)</Run>
+                                                        (
+                                                        <Run Text="{Binding Path=Asleep.Fraction, StringFormat=P, Mode=OneTime}" /> )
                                                     </Span>
                                                 </Paragraph>
                                             </TableCell>
                                             <TableCell>
                                                 <Paragraph>
-                                                    Overall BP Load: 62% Sys > 140mmHg &amp; 37% Dia > 90mmHg
+                                                    Asleep BP Load: 62% Sys > 140mmHg &amp; 37% Dia > 90mmHg
                                                 </Paragraph>
                                             </TableCell>
                                         </TableRow>
@@ -572,32 +672,33 @@
                             </TableCell>
                             <TableCell>
                                 <Paragraph>
-                                    <Run>166</Run>
+                                    <Run Text="{Binding Path=Asleep.SysMax, StringFormat=n2}" />
                                 </Paragraph>
                             </TableCell>
                             <TableCell>
                                 <Paragraph>
-                                    <Run>17:20</Run>
+                                    <Run Text="{Binding Path=Asleep.SysMaxTime, StringFormat=t}" />
                                 </Paragraph>
                             </TableCell>
                             <TableCell>
                                 <Paragraph>
-                                    <Run>105</Run>
+                                    <Run Text="{Binding Path=Asleep.SysMin, StringFormat=n2}" />
                                 </Paragraph>
                             </TableCell>
                             <TableCell>
                                 <Paragraph>
-                                    <Run>03:40</Run>
+                                    <Run Text="{Binding Path=Asleep.SysMinTime, StringFormat=t}" />
                                 </Paragraph>
                             </TableCell>
                             <TableCell>
                                 <Paragraph>
-                                    <Run>142</Run>
+                                    <Run Text="{Binding Path=Asleep.SysAvg, StringFormat=n2}" />
                                 </Paragraph>
                             </TableCell>
                             <TableCell>
                                 <Paragraph>
-                                    <Run>+/- 14.7</Run>
+                                    +/-
+                                    <Run Text="{Binding Path=Asleep.SysStd, StringFormat=n2}" />
                                 </Paragraph>
                             </TableCell>
                         </TableRow>
@@ -607,32 +708,33 @@
                             </TableCell>
                             <TableCell>
                                 <Paragraph>
-                                    <Run>166</Run>
+                                    <Run Text="{Binding Path=Asleep.DiaMax, StringFormat=n2}" />
                                 </Paragraph>
                             </TableCell>
                             <TableCell>
                                 <Paragraph>
-                                    <Run>17:20</Run>
+                                    <Run Text="{Binding Path=Asleep.DiaMaxTime, StringFormat=t}" />
                                 </Paragraph>
                             </TableCell>
                             <TableCell>
                                 <Paragraph>
-                                    <Run>105</Run>
+                                    <Run Text="{Binding Path=Asleep.DiaMin, StringFormat=n2}" />
                                 </Paragraph>
                             </TableCell>
                             <TableCell>
                                 <Paragraph>
-                                    <Run>03:40</Run>
+                                    <Run Text="{Binding Path=Asleep.DiaMinTime, StringFormat=t}" />
                                 </Paragraph>
                             </TableCell>
                             <TableCell>
                                 <Paragraph>
-                                    <Run>142</Run>
+                                    <Run Text="{Binding Path=Asleep.DiaAvg, StringFormat=n2}" />
                                 </Paragraph>
                             </TableCell>
                             <TableCell>
                                 <Paragraph>
-                                    <Run>+/- 14.7</Run>
+                                    +/-
+                                    <Run Text="{Binding Path=Asleep.DiaStd, StringFormat=n2}" />
                                 </Paragraph>
                             </TableCell>
                         </TableRow>
@@ -642,32 +744,33 @@
                             </TableCell>
                             <TableCell>
                                 <Paragraph>
-                                    <Run>166</Run>
+                                    <Run Text="{Binding Path=Asleep.MapMax, StringFormat=n2}" />
                                 </Paragraph>
                             </TableCell>
                             <TableCell>
                                 <Paragraph>
-                                    <Run>17:20</Run>
+                                    <Run Text="{Binding Path=Asleep.MapMaxTime, StringFormat=t}" />
                                 </Paragraph>
                             </TableCell>
                             <TableCell>
                                 <Paragraph>
-                                    <Run>105</Run>
+                                    <Run Text="{Binding Path=Asleep.MapMin, StringFormat=n2}" />
                                 </Paragraph>
                             </TableCell>
                             <TableCell>
                                 <Paragraph>
-                                    <Run>03:40</Run>
+                                    <Run Text="{Binding Path=Asleep.MapMinTime, StringFormat=t}" />
                                 </Paragraph>
                             </TableCell>
                             <TableCell>
                                 <Paragraph>
-                                    <Run>142</Run>
+                                    <Run Text="{Binding Path=Asleep.MapAvg, StringFormat=n2}" />
                                 </Paragraph>
                             </TableCell>
                             <TableCell>
                                 <Paragraph>
-                                    <Run>+/- 14.7</Run>
+                                    +/-
+                                    <Run Text="{Binding Path=Asleep.MapStd, StringFormat=n2}" />
                                 </Paragraph>
                             </TableCell>
                         </TableRow>
@@ -677,32 +780,33 @@
                             </TableCell>
                             <TableCell>
                                 <Paragraph>
-                                    <Run>166</Run>
+                                    <Run Text="{Binding Path=Asleep.HrMax, StringFormat=n2}" />
                                 </Paragraph>
                             </TableCell>
                             <TableCell>
                                 <Paragraph>
-                                    <Run>17:20</Run>
+                                    <Run Text="{Binding Path=Asleep.HrMaxTime, StringFormat=t}" />
                                 </Paragraph>
                             </TableCell>
                             <TableCell>
                                 <Paragraph>
-                                    <Run>105</Run>
+                                    <Run Text="{Binding Path=Asleep.HrMin, StringFormat=n2}" />
                                 </Paragraph>
                             </TableCell>
                             <TableCell>
                                 <Paragraph>
-                                    <Run>03:40</Run>
+                                    <Run Text="{Binding Path=Asleep.HrMinTime, StringFormat=t}" />
                                 </Paragraph>
                             </TableCell>
                             <TableCell>
                                 <Paragraph>
-                                    <Run>142</Run>
+                                    <Run Text="{Binding Path=Asleep.HrAvg, StringFormat=n2}" />
                                 </Paragraph>
                             </TableCell>
                             <TableCell>
                                 <Paragraph>
-                                    <Run>+/- 14.7</Run>
+                                    +/-
+                                    <Run Text="{Binding Path=Asleep.HrStd, StringFormat=n2}" />
                                 </Paragraph>
                             </TableCell>
                         </TableRow>
@@ -710,22 +814,18 @@
                 </Table>
             </Section>
             <Section>
-                <Paragraph>
-                    <Figure>
-                        <BlockUIContainer>
-                            <lvc:CartesianChart Height="200" Series="{Binding Path=PressureSeries}">
-                                <lvc:CartesianChart.AxisX>
-                                    <lvc:Axis LabelFormatter="{Binding Path=XFormatterTime}"/>
-                                </lvc:CartesianChart.AxisX>
-                                <lvc:CartesianChart.AxisY>
-                                    <lvc:Axis Title="mmHg" />
-                                </lvc:CartesianChart.AxisY>
-                            </lvc:CartesianChart>
-                        </BlockUIContainer>
-                    </Figure>
-                </Paragraph>
+                <BlockUIContainer>
+                    <lvc:CartesianChart Height="200" Series="{Binding Path=PressureSeries}">
+                        <lvc:CartesianChart.AxisX>
+                            <lvc:Axis LabelFormatter="{Binding Path=XFormatterTime}"/>
+                        </lvc:CartesianChart.AxisX>
+                        <lvc:CartesianChart.AxisY>
+                            <lvc:Axis Title="mmHg" />
+                        </lvc:CartesianChart.AxisY>
+                    </lvc:CartesianChart>
+                </BlockUIContainer>
             </Section>
-            <Section Background="Gray">
+            <Section Background="Gainsboro">
                 <Paragraph>
                     <Span FontWeight="Bold">Medical Diagnosis:</Span>
                     <Span>
