@@ -42,10 +42,17 @@ namespace HolterECG.Controls
             lineDiastolicSummary.Values = new ChartValues<DateTimePoint>();
             LineSeries lineMabpSummary = new LineSeries { Title = "MABP", PointGeometry = null, LineSmoothness = 0 };
             lineMabpSummary.Values = new ChartValues<DateTimePoint>();
-
-            this.From = _state.ActivePatient.Readings[0].Date.Ticks;
-            this.To = _state.ActivePatient.Readings[0].Date.AddHours(3).Ticks;
-
+            
+            if(_state.ActivePatient.Readings.Count > 0)
+            {
+                this.From = _state.ActivePatient.Readings[0].Date.Ticks;
+                this.To = _state.ActivePatient.Readings[0].Date.AddHours(3).Ticks;
+            }
+            else
+            {
+                this.From = 0;
+                this.To = 1;
+            }
             foreach (var reading in _state.ActivePatient.Readings)
             {
                 lineSystolic.Values.Add(new DateTimePoint(reading.Date, reading.Sys));
